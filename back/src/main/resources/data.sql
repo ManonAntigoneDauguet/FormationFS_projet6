@@ -1,9 +1,9 @@
 INSERT INTO `USERS` (`username`, `email`, `password`) VALUES
-('Maleficent', 'maleficent@disney.com', 'password123'),
-('Ursula', 'ursula@disney.com', 'password123'),
-('Scar', 'scar@disney.com', 'password123'),
-('Jafar', 'hades@disney.com', 'password123'),
-('Captain Hook', 'hook@disney.com', 'password123');
+('Maleficent', 'maleficent@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG'),
+('Ursula', 'ursula@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG'),
+('Scar', 'scar@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG'),
+('Jafar', 'hades@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG'),
+('Captain Hook', 'hook@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG');
 
 INSERT INTO `TOPICS` (`name`) VALUES
 ('Intelligence Artificielle'),

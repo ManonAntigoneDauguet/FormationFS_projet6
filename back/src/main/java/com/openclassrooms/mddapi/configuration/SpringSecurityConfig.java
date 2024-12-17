@@ -56,8 +56,6 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         // For the authentication
                         .requestMatchers("/user/register", "/user/login").permitAll()
-                        // For tests
-//                        .requestMatchers("/user/**").permitAll()
                         // For SWAGGER documentation
                         .requestMatchers("/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated());

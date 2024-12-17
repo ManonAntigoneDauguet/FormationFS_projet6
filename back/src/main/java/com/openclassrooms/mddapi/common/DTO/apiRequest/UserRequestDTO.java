@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.common.DTO.apiRequest;
 
-import com.openclassrooms.mddapi.configuration.personalisedValidator.PasswordConstraint;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -11,6 +11,7 @@ public class UserRequestDTO {
     private String username;
 
     @NotBlank(message = "An email is required")
+    @Email(message = "email must be a correct email address")
     private String email;
 
     @NotBlank(message = "A password is required")
