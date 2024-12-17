@@ -1,0 +1,19 @@
+package com.openclassrooms.mddapi.common.DTO.apiRequest;
+
+import com.openclassrooms.mddapi.configuration.personalisedValidator.PasswordConstraint;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class UserRequestDTO {
+
+    @NotBlank(message = "A username is required")
+    private String username;
+
+    @NotBlank(message = "An email is required")
+    private String email;
+
+    @NotBlank(message = "A password is required")
+    @PasswordConstraint(message = "The password must be at least 8 characters long and contain at least 1 special character, 1 uppercase letter and 1 lowercase letter")
+    private String password;
+}
