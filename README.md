@@ -47,3 +47,5 @@ The server run on the port 3004.
 When the server is launching, you can consult the documentation of the API with [this link](http://localhost:3004/api/swagger-ui/index.html).  
 
 Note : by default the JWT token expiration time is set on 1 day. You can change this setting in the `application.properties` file with the `mddapi.app.jwtExpirationMs` property.
+
+To test with a saved User, try with email 'scar@mdd.com' and password 'Password!123'
