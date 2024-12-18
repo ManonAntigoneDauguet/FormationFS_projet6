@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.configuration.personalisedValidator;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
@@ -9,5 +10,10 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConstraint {
-    String message();
+
+    String message() default "Invalid password";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

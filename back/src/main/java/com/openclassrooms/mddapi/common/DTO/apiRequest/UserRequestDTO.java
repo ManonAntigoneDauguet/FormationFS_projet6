@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.common.DTO.apiRequest;
 
+import com.openclassrooms.mddapi.configuration.personalisedValidator.PasswordConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
