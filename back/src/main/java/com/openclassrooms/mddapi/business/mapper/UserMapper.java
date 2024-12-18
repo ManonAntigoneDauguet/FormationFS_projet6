@@ -8,8 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
+    private final TopicMapper topicMapper;
+
+    public UserMapper(TopicMapper topicMapper) {
+        this.topicMapper = topicMapper;
+    }
+
     /**
-     * Converts a UserDTO object into a User object
+     * Converts a UserDTO object to a User object
      *
      * @param userRequestDTO as the UserDTO to convert
      * @return User
@@ -18,13 +24,12 @@ public class UserMapper {
         User user = new User();
         user.setUsername(userRequestDTO.getUsername());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());
 
         return user;
     }
 
     /**
-     * Converts a User object into a UserResponseDTO object
+     * Converts a User object to a UserResponseDTO object
      *
      * @param user as the User to convert
      * @return UserResponseDTO
@@ -34,6 +39,7 @@ public class UserMapper {
         responseDTO.setId(user.getId());
         responseDTO.setUsername(user.getUsername());
         responseDTO.setEmail(user.getEmail());
+        responseDTO.setSubscriptions(topicMapper.convertAllToResponseDTO(user.getSubscriptions()));
 
         return responseDTO;
     }
