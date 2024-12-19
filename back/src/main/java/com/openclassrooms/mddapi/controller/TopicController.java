@@ -19,7 +19,7 @@ public class TopicController {
     @GetMapping("topic")
     public ResponseEntity<Iterable<TopicResponseDTO>> getTopics() {
         Iterable<TopicResponseDTO> list = topicService.getTopics();
-        return ResponseEntity.of(Optional.ofNullable(list));
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping("topic/{id}")

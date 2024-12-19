@@ -20,12 +20,12 @@ INSERT INTO `USER_TOPIC_SUBSCRIPTIONS` (`user_id`, `topic_id`) VALUES
 (4, 5),
 (5, 3);
 
-INSERT INTO `POSTS` (`title`, `content`, `user_id`, `topic_id`) VALUES
-('La domination de l\'intelligence artificielle', 'L\'intelligence artificielle est la clé pour gouverner le monde. Elle peut surpasser l\'humanité et rendre les humains obsolètes. Avec de puissants algorithmes, je régnerai sur tout !', 1, 1),
-('L\'art de la manipulation des données', 'L\'information est le pouvoir, et la manipulation des données est l\'outil pour conquérir. Les entreprises sont vulnérables, et il faut exploiter leurs failles pour dominer.', 2, 2),
-('Pourquoi le développement web est une arme secrète', 'Le développement web est plus qu\'un simple code. C\'est un moyen de créer des applications qui peuvent dominer l\'infrastructure informatique mondiale. Si vous maîtrisez ce domaine, vous avez le contrôle total.', 3, 3),
-('Blockchain : la révolution des méchants', 'Le concept de Blockchain est fascinant. Il nous permet de sécuriser des transactions sans passer par les autorités centralisées. Imaginez ce que nous pourrions faire avec une telle technologie.', 4, 4),
-('Pourquoi le Cloud Computing va changer le monde', 'Les données sont le futur, et le cloud est la clé pour les centraliser et les rendre accessibles partout. En contrôlant les serveurs dans le cloud, vous contrôlez le monde numérique.', 5, 5);
+INSERT INTO `POSTS` (`title`, `content`, `user_id`, `topic_id`, `created_at`) VALUES
+('La domination de l\'intelligence artificielle', 'L\'intelligence artificielle est la clé pour gouverner le monde. Elle peut surpasser l\'humanité et rendre les humains obsolètes. Avec de puissants algorithmes, je régnerai sur tout !', 1, 1, '2022-01-01 16:32:04.789463'),
+('L\'art de la manipulation des données', 'L\'information est le pouvoir, et la manipulation des données est l\'outil pour conquérir. Les entreprises sont vulnérables, et il faut exploiter leurs failles pour dominer.', 2, 2, '2022-01-01 17:51:04.789463'),
+('Pourquoi le développement web est une arme secrète', 'Le développement web est plus qu\'un simple code. C\'est un moyen de créer des applications qui peuvent dominer l\'infrastructure informatique mondiale. Si vous maîtrisez ce domaine, vous avez le contrôle total.', 3, 3, '2021-01-01 17:51:04.789463'),
+('Blockchain : la révolution des méchants', 'Le concept de Blockchain est fascinant. Il nous permet de sécuriser des transactions sans passer par les autorités centralisées. Imaginez ce que nous pourrions faire avec une telle technologie.', 4, 4, '2024-01-01 17:51:04.789463'),
+('Pourquoi le Cloud Computing va changer le monde', 'Les données sont le futur, et le cloud est la clé pour les centraliser et les rendre accessibles partout. En contrôlant les serveurs dans le cloud, vous contrôlez le monde numérique.', 5, 5, '2024-12-10 17:51:04.789463');
 
 INSERT INTO `COMMENTS` (`content`, `user_id`, `post_id`) VALUES
 ('L\'IA peut vraiment changer la donne, mais il faut être prudent. Tout pouvoir doit être contrôlé.', 2, 1),
