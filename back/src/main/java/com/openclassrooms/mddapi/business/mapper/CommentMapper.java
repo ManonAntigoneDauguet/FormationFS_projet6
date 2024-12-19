@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.business.mapper;
 
 import com.openclassrooms.mddapi.business.entity.Comment;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.CommentRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.CommentResponseDTO;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,19 @@ public class CommentMapper {
 
     public CommentMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    /**
+     * Converts a CommentResponseDTO to a Comment entity
+     *
+     * @param commentRequestDTO as CommentRequestDTO to convert
+     * @return Comment
+     */
+    public Comment convertToEntity(CommentRequestDTO commentRequestDTO) {
+        Comment comment = new Comment();
+        comment.setContent(commentRequestDTO.getContent());
+
+        return comment;
     }
 
     /**

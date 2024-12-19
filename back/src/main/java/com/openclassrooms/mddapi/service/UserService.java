@@ -43,16 +43,6 @@ public class UserService {
     }
 
     /**
-     * Finds the user by id and return the entity
-     *
-     * @param id as the user id
-     * @return User
-     */
-    private User getUserEntityById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
-    }
-
-    /**
      * Finds the user by email and return UserResponseDTO
      *
      * @param email as String
@@ -98,16 +88,6 @@ public class UserService {
         user.setUsername(userRequestDTO.getUsername());
         user.setEmail(userRequestDTO.getEmail());
         userRepository.save(user);
-    }
-
-    /**
-     * Finds the user by id and return UserResponseDTO     // Remove for the prod
-     *
-     * @param id as the user id
-     * @return UserResponseDTO
-     */
-    public UserResponseDTO getUserDTOById(Long id) {
-        return userMapper.convertToResponseDTO(getUserEntityById(id));
     }
 
     /**

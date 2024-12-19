@@ -31,13 +31,23 @@ public class TopicService {
     }
 
     /**
-     * Finds topic by id
+     * Finds the topic by id adn return the entity
      *
      * @param id as topic id
      * @return Topic
      */
-    public Topic getTopicByID(Long id) {
+    public Topic getTopicEntityByID(Long id) {
         return topicRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Topic not found"));
+    }
+
+    /**
+     * Finds the topic by id adn return TopicResponseDTO
+     *
+     * @param id as topic id
+     * @return TopicResponseDTO
+     */
+    public TopicResponseDTO getTopicResponseDTOByID(Long id) {
+        return topicMapper.convertToResponseDTO(getTopicEntityByID(id));
     }
 
     /**
@@ -56,7 +66,7 @@ public class TopicService {
      */
     public void subscription(Long id) {
         User user = userService.getUserEntityByAuthentication();
-        Topic topic = getTopicByID(id);
+        Topic topic = getTopicEntityByID(id);
         SubscriptionKey subscriptionKey = new SubscriptionKey(user.getId(), id);
 
         if (subscriptionRepository.findById(subscriptionKey).isPresent()) {

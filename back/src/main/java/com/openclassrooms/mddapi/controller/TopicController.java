@@ -25,6 +25,12 @@ public class TopicController {
         return ResponseEntity.ok(list);
     }
 
+    @GetMapping("topic/{id}")
+    public ResponseEntity<TopicResponseDTO> getTopicById(@PathVariable Long id) {
+        TopicResponseDTO topic = topicService.getTopicResponseDTOByID(id);
+        return ResponseEntity.ok(topic);
+    }
+
     @PostMapping("topic/{id}/subscribe")
     public ResponseEntity<String> subscribe(@PathVariable final Long id) {
         topicService.subscription(id);

@@ -48,14 +48,23 @@ public class PostService {
     }
 
     /**
-     * Gets Post by id
+     * Gets Post by id and return PostResponseDTO
      *
      * @param id as the Post id
      * @return PostResponseDTO
      */
-    public PostResponseDTO getPostByID(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found"));
-        return postMapper.convertToResponseDTO(post, true);
+    public PostResponseDTO getPostResponseDTOByID(Long id) {
+        return postMapper.convertToResponseDTO(getPostEntityByID(id), true);
+    }
+
+    /**
+     * Gets Post by id and return entity
+     *
+     * @param id as the Post id
+     * @return Post
+     */
+    public Post getPostEntityByID(Long id) {
+        return postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
     /**
@@ -65,7 +74,7 @@ public class PostService {
      */
     public void savePost(PostRequestDTO postRequestDTO) {
         User author = userService.getUserEntityByAuthentication();
-        Topic topic = topicService.getTopicByID(postRequestDTO.getTopicId());
+        Topic topic = topicService.getTopicEntityByID(postRequestDTO.getTopicId());
 
         Post post = postMapper.convertToEntity(postRequestDTO);
         post.setAuthor(author);

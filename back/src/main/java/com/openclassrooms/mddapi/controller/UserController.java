@@ -56,11 +56,4 @@ public class UserController {
         userService.updateUser(oldUser, userRequestDTO);
         return ResponseEntity.ok("User correctly updated !");
     }
-
-    // Remove for the prod
-    @GetMapping("user/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        UserResponseDTO user = userService.getUserDTOById(id);
-        return ResponseEntity.ok(user);
-    }
 }
