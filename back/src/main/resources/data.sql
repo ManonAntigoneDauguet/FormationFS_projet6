@@ -27,8 +27,8 @@ INSERT INTO `POSTS` (`title`, `content`, `user_id`, `topic_id`, `created_at`) VA
 ('Blockchain : la révolution des méchants', 'Le concept de Blockchain est fascinant. Il nous permet de sécuriser des transactions sans passer par les autorités centralisées. Imaginez ce que nous pourrions faire avec une telle technologie.', 4, 4, '2024-01-01 17:51:04.789463'),
 ('Pourquoi le Cloud Computing va changer le monde', 'Les données sont le futur, et le cloud est la clé pour les centraliser et les rendre accessibles partout. En contrôlant les serveurs dans le cloud, vous contrôlez le monde numérique.', 5, 5, '2024-12-10 17:51:04.789463');
 
-INSERT INTO `COMMENTS` (`content`, `user_id`, `post_id`) VALUES
-('L\'IA peut vraiment changer la donne, mais il faut être prudent. Tout pouvoir doit être contrôlé.', 2, 1),
-('La sécurité est cruciale. Si l\'IA est mal utilisée, elle pourrait détruire l\'infrastructure informatique que nous construisons.', 1, 1),
-('La Blockchain peut être utilisée pour des fins maléfiques, c\'est certain. Elle est décentralisée et incontrôlable, ce qui est parfait pour une révolution.', 3, 4),
-('Je pense que le Cloud Computing est trop risqué. Vous ne savez jamais vraiment où vos données sont stockées.', 4, 5);
+INSERT INTO `COMMENTS` (`content`, `user_id`, `post_id`, `created_at`) VALUES
+('L\'IA peut vraiment changer la donne, mais il faut être prudent. Tout pouvoir doit être contrôlé.', 2, 1, '2022-02-01 16:32:04.789463'),
+('La sécurité est cruciale. Si l\'IA est mal utilisée, elle pourrait détruire l\'infrastructure informatique que nous construisons.', 1, 1, '2022-03-01 16:32:04.789463'),
+('La Blockchain peut être utilisée pour des fins maléfiques, c\'est certain. Elle est décentralisée et incontrôlable, ce qui est parfait pour une révolution.', 3, 4, '2024-02-01 16:32:04.789463'),
+('Je pense que le Cloud Computing est trop risqué. Vous ne savez jamais vraiment où vos données sont stockées.', 4, 5, '2024-12-15 16:32:04.789463');

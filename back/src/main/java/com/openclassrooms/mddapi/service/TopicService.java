@@ -36,7 +36,7 @@ public class TopicService {
      * @param id as topic id
      * @return Topic
      */
-    private Topic getTopicByID(Long id) {
+    public Topic getTopicByID(Long id) {
         return topicRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Topic not found"));
     }
 

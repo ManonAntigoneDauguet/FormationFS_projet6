@@ -1,9 +1,8 @@
 package com.openclassrooms.mddapi.common.DTO.apiRequest;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.openclassrooms.mddapi.business.entity.Topic;
-import com.openclassrooms.mddapi.business.entity.User;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -15,9 +14,7 @@ public class PostRequestDTO {
     @NotBlank(message = "A content is required")
     private String content;
 
-    @NotBlank(message = "A topic is required")
-    private Topic topic;
-
-    @JsonIgnore
-    private User author;
+    @NotNull(message = "A topic id is required")
+    @Min(value = 1, message = "A topic id must be greater than 0")
+    private Long topicId;
 }

@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.common.DTO.apiResponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,4 +22,7 @@ public class PostResponseDTO {
     private TopicResponseDTO topic;
 
     private ShortUserResponseDTO author;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<CommentResponseDTO> comments;
 }
