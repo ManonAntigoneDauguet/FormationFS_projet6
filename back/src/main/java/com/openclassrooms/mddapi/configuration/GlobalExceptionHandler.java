@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.configuration;
 
+import com.openclassrooms.mddapi.common.exception.SubscriberException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +51,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException e) {
         return new ResponseEntity<>("Bad correspondence between password and email", HttpStatus.UNAUTHORIZED);
+    }
+
+    /**
+     * Allows to avert the user when he wants to subscribe to topic that he is already subscriber
+     *
+     * @param e as AlreadySubscriberException
+     * @return ResponseEntity
+     */
+    @ExceptionHandler(SubscriberException.class)
+    public ResponseEntity<String> handleAlreadySubscriberException(SubscriberException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
