@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.common.DTO.apiRequest.CommentRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiRequest.PostRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiResponse.CommentResponseDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.PostResponseDTO;
 import com.openclassrooms.mddapi.service.CommentService;
 import com.openclassrooms.mddapi.service.PostService;
@@ -47,7 +48,15 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    @PostMapping("post/{id}")
+    @GetMapping("post/{id}/comment")
+    @Tag(name = "Post")
+    @Operation(summary = "Get all comments", description = "Get all comment of a specific post")
+    public ResponseEntity<Iterable<CommentResponseDTO>> getComments(@PathVariable Long id) {
+        Iterable<CommentResponseDTO> comments = commentService.getComments(id);
+        return ResponseEntity.ok(comments);
+    }
+
+    @PostMapping("post/{id}/comment")
     @Tag(name = "Post")
     @Operation(summary = "Add a comment", description = "Add a comment on a specific post")
     public ResponseEntity<String> saveComment(@PathVariable Long id, @Valid @RequestBody CommentRequestDTO commentRequestDTO) {

@@ -38,7 +38,7 @@ public class PostService {
     }
 
     /**
-     * Gets all posts of a specified topic,  ordered by chronology
+     * Gets all posts of a specified topic, ordered by chronology
      *
      * @param id as topic id
      * @return Iterable<PostResponseDTO>
@@ -54,7 +54,7 @@ public class PostService {
      * @return PostResponseDTO
      */
     public PostResponseDTO getPostResponseDTOByID(Long id) {
-        return postMapper.convertToResponseDTO(getPostEntityByID(id), true);
+        return postMapper.convertToResponseDTO(getPostEntityByID(id));
     }
 
     /**

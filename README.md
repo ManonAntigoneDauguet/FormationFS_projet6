@@ -5,13 +5,13 @@ This is a fullstack project with Java Spring Boot and Angular technology.
 
 ## Dependencies
 
-This project is using java 17.
+This project is using java 17, MySQL and Angular.
 
 ## Back
 
 ### How to install and run the project
 
-After creating your own database, complete the `.env` file with the following constants :
+After creating your own MySQL database, complete the `.env` file with the following constants :
 - `DATABASE_USERNAME` as your database username
 - `DATABASE_PASSWORD` as your database password
 - `JWT_KEY` as the key used to encode the JWT token. It must be sufficiently long.  
@@ -29,6 +29,9 @@ Note : by default the JWT token expiration time is set on 1 day. You can change 
 
 To test application before production, the database is cleared and repopulated, at each run, with the data.sql file.  
 On the application, Postman, or SWAGGER documenation, try login with email 'scar@mdd.com' and password 'Password!123'
+
+In test environment, we use a copy of these mocked data in data-test.sql.   
+This one will be conserved in production.
 
 
 ## Front

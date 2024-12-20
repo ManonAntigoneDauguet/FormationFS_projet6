@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.business.entity.Post;
 import com.openclassrooms.mddapi.business.entity.User;
 import com.openclassrooms.mddapi.business.mapper.CommentMapper;
 import com.openclassrooms.mddapi.common.DTO.apiRequest.CommentRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiResponse.CommentResponseDTO;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,16 @@ public class CommentService {
         this.commentMapper = commentMapper;
         this.userService = userService;
         this.postService = postService;
+    }
+
+    /**
+     * Gets all comments of a specified post, ordered by chronology
+     *
+     * @param id as post id
+     * @return Iterable<CommentResponseDTO>
+     */
+    public Iterable<CommentResponseDTO> getComments(Long id) {
+        return commentMapper.convertAllToResponseDTO(commentRepository.findByPostIdOrderByCreatedAtDesc(id));
     }
 
     /**

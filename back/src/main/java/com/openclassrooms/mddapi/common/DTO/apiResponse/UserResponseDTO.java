@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.common.DTO.apiResponse;
 
-import com.openclassrooms.mddapi.business.entity.Topic;
 import lombok.Data;
 
 import java.util.List;
