@@ -1,4 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables';
+@import './mixins';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    position: relative;
+    max-width: 1440px;
+}
+
+body {
+    margin: auto;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+main {
+    padding: 32px;
+
+
+    @include mobile-only {
+        padding: 16px;
+    }
+}
+
+.button.button {
+    font-size: 24px;
+    color: black;
+    border: 1px solid black;
+    display: block;
+    padding: 8px 32px;
+    border-radius: 8px;
+
+    @include mobile-only {
+        font-weight: 300;
+    }
+
+    &--primary {
+        background-color: white;
+    }
+}

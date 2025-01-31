@@ -1,4 +1,4 @@
-# P6-Full-Stack-reseau-dev
+# MDD (Monde de Dév)
 
 Welcome to this "Minimum Viable Product" for the MDD ("Monde de Dév") project.  
 This is a fullstack project with Java Spring Boot and Angular technology.
