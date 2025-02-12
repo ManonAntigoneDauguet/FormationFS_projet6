@@ -20,8 +20,13 @@ body {
 }
 
 main {
-    padding: 32px;
-
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
 
     @include mobile-only {
         padding: 16px;
@@ -29,12 +34,12 @@ main {
 }
 
 .button.button {
-    font-size: 24px;
     color: black;
     border: 1px solid black;
     display: block;
     padding: 8px 32px;
     border-radius: 8px;
+    cursor: pointer;
 
     @include mobile-only {
         font-weight: 300;
