@@ -1,15 +1,28 @@
 <header>
     <div class="content">
         <div class="logoContainer">
-            <img src="/assets/logo_p6.png" alt="logo" />
+            <img class="logo" src="/assets/logo_p6.png" alt="logo" />
         </div>
-        <button mat-icon-button (click)="openMenu()" class="menu">
-            <mat-icon>menu</mat-icon>
+
+        <button mat-icon-button (click)="openMenu()" class="menuIcon">
+            <mat-icon  fontIcon="menu" class="mat-icon-medium"></mat-icon>
         </button>
+
         <div class="navLinkContainer" [ngClass]="{'hide': displayMenu}">
-            <p class="navLink">Articles</p>
-            <p class="navLink">Thèmes</p>
-            <p class="navLink">Compte</p>
+            <aside class="navLinkContainer__background navLinkContainer__background--blured"></aside>
+            <aside class="navLinkContainer__background navLinkContainer__background--white"></aside>
+            <a class="navLink" routerLink="/posts" routerLinkActive="currentPage">
+                Articles
+            </a>
+            <a class="navLink" routerLink="/topics" routerLinkActive="currentPage">
+                Thèmes
+            </a>
+            <a class="navLink navLink--account" routerLink="profile" routerLinkActive="currentPage">
+                <div class="accountIconBackgound"></div>
+                <img src="assets/icon_user.svg" alt="Compte">
+                <img src="assets/icon_user-activeLink.svg" alt="Compte">
+                ghj
+            </a>
         </div>
     </div>
 </header>

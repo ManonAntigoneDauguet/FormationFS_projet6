@@ -10,3 +10,20 @@
         @content;
     }
 }
+
+@mixin tablet-and-more {
+    @media all and (min-width: map-get($breakpoints, xsmall)) {
+        @content;
+    }
+}
+
+@mixin core-container {
+    max-width: 1440px;
+    padding: 32px;
+    margin: auto;
+    box-sizing: border-box;
+
+    @include mobile-only {
+        padding: 16px;
+    }
+}
