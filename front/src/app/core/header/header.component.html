@@ -1,16 +1,16 @@
 <header>
-    <div class="content">
+    <div class="header__content">
         <div class="logoContainer">
             <img class="logo" src="/assets/logo_p6.png" alt="logo" />
         </div>
 
         <button mat-icon-button (click)="openMenu()" class="menuIcon">
-            <mat-icon  fontIcon="menu" class="mat-icon-medium"></mat-icon>
+            <mat-icon fontIcon="menu" class="mat-icon-medium"></mat-icon>
         </button>
 
-        <div class="navLinkContainer" [ngClass]="{'hide': displayMenu}">
-            <aside class="navLinkContainer__background navLinkContainer__background--blured"></aside>
-            <aside class="navLinkContainer__background navLinkContainer__background--white"></aside>
+        <nav class="nav" [ngClass]="{'invisibleNav': !displayMenu}">
+            <aside class="nav__background nav__background--blured"></aside>
+            <aside class="nav__background nav__background--white"></aside>
             <a class="navLink" routerLink="/posts" routerLinkActive="currentPage">
                 Articles
             </a>
@@ -19,10 +19,9 @@
             </a>
             <a class="navLink navLink--account" routerLink="profile" routerLinkActive="currentPage">
                 <div class="accountIconBackgound"></div>
-                <img src="assets/icon_user.svg" alt="Compte">
-                <img src="assets/icon_user-activeLink.svg" alt="Compte">
-                ghj
+                <img src="assets/icon_user.svg" alt="Compte" class="accountIcon--no-currentPage">
+                <img src="assets/icon_user-activeLink.svg" alt="Compte" class="accountIcon--currentPage">
             </a>
-        </div>
+        </nav>
     </div>
 </header>

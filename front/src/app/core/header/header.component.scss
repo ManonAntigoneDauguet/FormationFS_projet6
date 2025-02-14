@@ -13,11 +13,10 @@ header {
             height: 70px;
             right: 8px;
         }
-
     }
 }
 
-.content {
+.header__content {
     position: relative;
     height: 120px;
     display: flex;
@@ -29,31 +28,24 @@ header {
     @include mobile-only {
         height: 70px;
     }
-
 }
 
-.menuIcon {
-    display: none;
-}
-
-.navLinkContainer {
+/********************** NAV ***********************/
+.nav {
     position: relative;
     display: flex;
     flex-direction: row;
     gap: 24px;
 
-    @include mobile-only {
-        height: 90dvh;
-        top: 80px;
-        flex-direction: column;
-        position: fixed;
-        right: 16px;
-    }
+    &.invisibleNav {
+        transform: scale(0);
 
-    @include tablet-and-more {
-        opacity: 1;
+        @include tablet-and-more {
+            transform: scale(1);
+        }
     }
 }
+
 
 .navLink {
     color: black;
@@ -67,10 +59,6 @@ header {
     }
 }
 
-.currentPage {
-    color: $primary-color;
-}
-
 .navLink--account {
     position: relative;
     display: flex;
@@ -80,11 +68,10 @@ header {
 
     .accountIconBackgound {
         position: absolute;
-        width: 50px;        
-        height: 50px;          
-        border-radius: 50%;    
-        background-color: rgba(217, 217, 217, 1);  
-        border: 4px solid $primary-color;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(217, 217, 217, 1);
     }
 
     img {
@@ -99,10 +86,51 @@ header {
     }
 }
 
+.menuIcon {
+    display: none;
+}
 
+// .invisibleNav {
+//     transform: scale(0);
+// }
+
+/******************* CURRENT PAGE ********************/
+.accountIcon--currentPage {
+    opacity: 0;
+}
+
+.accountIcon--no-currentPage {
+    opacity: 1;
+}
+
+.currentPage {
+    color: $primary-color;
+
+    .accountIconBackgound {
+        border: 4px solid $primary-color;
+    }
+
+    .accountIcon--currentPage {
+        opacity: 1;
+    }
+
+    .accountIcon--no-currentPage {
+        opacity: 0;
+    }
+}
+
+/******************* MOBILE VERSION ********************/
 @include mobile-only {
 
-    .navLinkContainer__background {
+    .nav {
+        height: 90dvh;
+        top: 80px;
+        flex-direction: column;
+        position: fixed;
+        right: 16px;
+    }
+
+    .nav__background {
         position: fixed;
         height: 100dvh;
         background-color: white;
@@ -132,4 +160,9 @@ header {
         transform: scale(1.5);
     }
 
+    .navLink--account {
+        position: absolute;
+        bottom: 48px;
+        right: 16px;
+    }
 }
