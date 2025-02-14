@@ -1,0 +1,15 @@
+<header>
+    <div class="content">
+        <div class="logoContainer">
+            <img src="/assets/logo_p6.png" alt="logo" />
+        </div>
+        <button mat-icon-button (click)="openMenu()" class="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="navLinkContainer" [ngClass]="{'hide': displayMenu}">
+            <p class="navLink">Articles</p>
+            <p class="navLink">Thèmes</p>
+            <p class="navLink">Compte</p>
+        </div>
+    </div>
+</header>

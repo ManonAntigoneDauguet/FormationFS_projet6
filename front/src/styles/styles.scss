@@ -11,7 +11,6 @@ html,
 body {
     height: 100%;
     position: relative;
-    max-width: 1440px;
 }
 
 body {
@@ -22,30 +21,76 @@ body {
 main {
     width: 100vw;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 24px;
+    margin: auto;
+    max-width: 1440px;
 
     @include mobile-only {
+        box-sizing: border-box;
         padding: 16px;
     }
 }
 
+p, span, label, input {
+    font-size: 22px;
+}
+
+h1.title {
+    text-align: center;
+    font-size: 32px;
+}
+
 .button.button {
-    color: black;
     border: 1px solid black;
     display: block;
     padding: 8px 32px;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 22px;
+    text-wrap: nowrap;
+    font-weight: bold;
+    min-width: 200px;
 
     @include mobile-only {
         font-weight: 300;
     }
 
     &--primary {
+        border: none;
+    }
+
+    &--secondary {
+        color: black;
         background-color: white;
     }
+}
+
+
+.coupleInputLabel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    input {
+        color: gray;
+        box-sizing: border-box;        
+        padding: 18px 16px;
+        border-radius: 8px;
+    }
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 350px;
+
+    @include mobile-only {
+        width: 100%;
+     }
+}
+
+.hide {
+    opacity: 0;
 }

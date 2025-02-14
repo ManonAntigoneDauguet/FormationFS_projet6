@@ -1,3 +1,22 @@
 <main>
-    <p>login works!</p>
+    <div class="content">
+        <h1 class="title">Se connecter</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
+
+            <div class="coupleInputLabel">
+                <label for="email">E-mail ou nom d'utilisateur</label>
+                <input matInput formControlName="email" id="email">
+            </div>
+            <div class="coupleInputLabel">
+                <label for="password">Mot de passe</label>
+                <input matInput formControlName="password" id="password">
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
+                class="button button--primary">
+                Se connecter
+            </button>
+
+        </form>
+    </div>
 </main>

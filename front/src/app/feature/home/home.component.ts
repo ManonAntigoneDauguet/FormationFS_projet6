@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./home.component.scss'],
   imports: [
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatButtonModule
   ]
 })
 export class HomeComponent implements OnInit {
