@@ -1,0 +1,59 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+
+.postDetail__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: flex-start;
+    padding-left: 48px;
+
+    .title {
+        text-align: start;
+        margin-bottom: 0;
+        font-weight: 600;
+    }
+
+    span,
+    p {
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+}
+
+.postDataContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+h2.commentTitlePart {
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/********************** commentsContainer ***********************/
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 48px 0px 40px;
+}
+
+.comment {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+
+    .username {
+        font-style: italic;
+        grid-column: 1 / 2;
+    }
+
+    .content {
+        background-color: $secondary-color;
+        border-radius: 8px;
+        padding: 8px 16px 16px 16px;
+        grid-column: 2 / 3;
+    }
+}

@@ -13,4 +13,7 @@ export class TopicListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public toSubscribe() {
+    alert("Vous êtes abonné !");
+  }
 }

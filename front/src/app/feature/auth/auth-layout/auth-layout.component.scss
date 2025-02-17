@@ -27,14 +27,6 @@
     }
 }
 
-.backArrow {
-    color: black;
-    transform: scale(1.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 /********************** register/login__content ***********************/
 :host ::ng-deep .register__content,
 :host ::ng-deep .login__content {

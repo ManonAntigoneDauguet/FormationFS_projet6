@@ -32,14 +32,18 @@
 }
 
 .filterPostsContainer {
+    all: unset;
+    display: inline-block;
+    cursor: pointer;
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+
     display: flex;
     align-items: center;
     gap: 8px;
 
-    button {
-        all: unset;
-        display: inline-block;
-        cursor: pointer;
+    &:hover {
+        opacity: 0.7;
     }
 
     @include mobile-only {
@@ -66,10 +70,12 @@
 }
 
 .post {
+    position: relative;
     background-color: $secondary-color;
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 8px 16px 16px 16px;
     max-width: 45%;
+
 
     @include tablet-and-less {
         max-width: 100%;
@@ -92,16 +98,34 @@
         }
 
         p {
-            display: -webkit-box;        
-            -webkit-box-orient: vertical;   
-            -webkit-line-clamp: 5;  
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
             line-clamp: 5;
-            overflow: hidden;              
-            text-overflow: ellipsis; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0;
 
             @include mobile-only {
-                -webkit-line-clamp: 4;  
+                -webkit-line-clamp: 4;
             }
         }
+    }
+}
+
+
+.postDetailLink {
+    position: absolute;
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+    border-radius: 8px;
+
+    &:hover {
+        opacity: 0.1;
     }
 }

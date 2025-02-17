@@ -6,15 +6,13 @@
                     Créer un article
                 </button>
             </div>
-            <div class="filterPostsContainer">
+            <button (click)="filterPosts()" class="filterPostsContainer">
                 <span class="subtitle">Trier par</span>
-                <button (click)="filterPosts()">
-                    <mat-icon>arrow_downward</mat-icon>
-                </button>
-            </div>
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
         </div>
         <div class="postsContainer">
-            <article class="post">
+            <article class="post" routerLink="/posts/1">
                 <div class="post__content">
                     <h2 class="subtitle">Titre d'article</h2>
                     <div class="postDataContainer">
@@ -36,6 +34,7 @@
                         galley of type and scrambled
                     </p>
                 </div>
+                <a routerLink="/posts/1" class="postDetailLink"></a>
             </article>
             <article class="post">
                 <div class="post__content">

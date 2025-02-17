@@ -1,4 +1,28 @@
 <main>
-   <p>post-detail works!</p> 
-</main>
+   <div class="postDetail__content">
+      <a class="backArrow" routerLink="/" routerLinkActive="currentPage">
+         <mat-icon>keyboard_backspace</mat-icon>
+      </a>
+      <h1 class="title">Titre de l'article sélectionné</h1>
+      <div class="postDataContainer">
+         <span>Date</span>
+         <span>Auteur</span>
+         <span>Thème</span>
+      </div>
+      <p>
+         Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+         has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+         galley of type and scrambled
+      </p>
 
+      <hr>
+
+      <h2 class="commentTitlePart">Commentaires</h2>
+      <div class="commentsContainer"> 
+         <article class="comment">
+            <p class="username">username</p>
+            <p class="content">contenu du commentaire</p>
+         </article>
+      </div>
+   </div>
+</main>
