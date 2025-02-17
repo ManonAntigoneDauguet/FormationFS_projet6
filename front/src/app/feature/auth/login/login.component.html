@@ -1,5 +1,8 @@
 <main>
-    <div class="content">
+    <div class="login__content">
+        <a class="backArrow" routerLink="/" routerLinkActive="currentPage">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </a>
         <h1 class="title">Se connecter</h1>
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
 
@@ -16,7 +19,6 @@
                 class="button button--primary">
                 Se connecter
             </button>
-
         </form>
     </div>
 </main>

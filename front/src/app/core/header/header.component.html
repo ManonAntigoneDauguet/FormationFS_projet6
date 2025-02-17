@@ -1,14 +1,14 @@
 <header>
-    <div class="header__content">
+    <div class="header__content" [ngClass]="{'header__content--notLogged': !isLogged}">
         <div class="logoContainer">
             <img class="logo" src="/assets/logo_p6.png" alt="logo" />
         </div>
 
-        <button mat-icon-button (click)="openMenu()" class="menuIcon">
+        <button *ngIf="isLogged" mat-icon-button (click)="openMenu()" class="menuIcon">
             <mat-icon fontIcon="menu" class="mat-icon-medium"></mat-icon>
         </button>
 
-        <nav class="nav" [ngClass]="{'invisibleNav': !displayMenu}">
+        <nav *ngIf="isLogged" class="nav" [ngClass]="{'invisibleNav': !displayMenu}">
             <aside class="nav__background nav__background--blured"></aside>
             <aside class="nav__background nav__background--white"></aside>
             <a class="navLink" routerLink="/posts" routerLinkActive="currentPage">
@@ -24,4 +24,5 @@
             </a>
         </nav>
     </div>
+    <hr>
 </header>

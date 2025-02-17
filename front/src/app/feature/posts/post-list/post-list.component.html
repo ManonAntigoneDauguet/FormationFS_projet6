@@ -1,3 +1,66 @@
 <main>
-    <p>post-list works!</p>
+    <div class="postList__content">
+        <div class="postList__header">
+            <div class="NewPostButtonContainer">
+                <button mat-raised-button class="button button--primary" routerLink="auth/register">
+                    Créer un article
+                </button>
+            </div>
+            <div class="filterPostsContainer">
+                <span class="subtitle">Trier par</span>
+                <button (click)="filterPosts()">
+                    <mat-icon>arrow_downward</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="postsContainer">
+            <article class="post">
+                <div class="post__content">
+                    <h2 class="subtitle">Titre d'article</h2>
+                    <div>
+                        <span>Date</span>
+                        <span>Auteur</span>
+                    </div>
+                    <p>
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        lllllllooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo...
+                    </p>
+                </div>
+            </article>
+            <article class="post">
+                <div class="post__content">
+                    <h2 class="subtitle">Titre d'article</h2>
+                    <div>
+                        <span>Date</span>
+                        <span>Auteur</span>
+                    </div>
+                    <p>
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        lllllllooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo...
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </div>
 </main>

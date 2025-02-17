@@ -1,0 +1,63 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.postList__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 21px;
+}
+
+.postList__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include mobile-only {
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 21px;
+    }
+}
+
+.filterPostsContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    button {
+        all: unset;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    @include mobile-only {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.NewPostButtonContainer {
+    @include mobile-only {
+        margin: auto;
+    }
+}
+
+.postsContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 21px;
+}
+
+.post {
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 8px;
+    padding: 21px;
+    box-sizing: border-box;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 21px;
+    }
+}

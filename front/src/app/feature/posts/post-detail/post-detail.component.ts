@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-post-detail',
-  standalone: true,
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })

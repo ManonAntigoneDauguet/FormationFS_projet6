@@ -9,6 +9,8 @@ export class HeaderComponent implements OnInit {
 
   public displayMenu = false;
 
+  public isLogged = false;
+
   constructor() { }
 
   ngOnInit(): void {
