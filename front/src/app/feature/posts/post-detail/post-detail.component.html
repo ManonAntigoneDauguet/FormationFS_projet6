@@ -5,9 +5,11 @@
       </a>
       <h1 class="title">Titre de l'article sélectionné</h1>
       <div class="postDataContainer">
-         <span>Date</span>
-         <span>Auteur</span>
-         <span>Thème</span>
+         <div class="postDataContainer--1">
+            <span>Date</span>
+            <span>Auteur</span>
+         </div>
+         <span class="postDataContainer--1">Thème</span>
       </div>
       <p>
          Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -18,11 +20,26 @@
       <hr>
 
       <h2 class="commentTitlePart">Commentaires</h2>
-      <div class="commentsContainer"> 
+      <div class="commentsContainer">
          <article class="comment">
             <p class="username">username</p>
-            <p class="content">contenu du commentaire</p>
+            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
          </article>
+         <article class="comment">
+            <p class="username">username</p>
+            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
+         </article>
+         <article class="comment">
+            <p class="username">username</p>
+            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
+         </article>
+      </div>
+
+      <div class="newComment commentsContainer">
+         <textarea id="comment" name="comment" placeholder="Ecrivez ici votre commentaire"></textarea>
+         <button class="sendButton" (click)="sendComment()">
+            <img src="/assets/send_comment.svg" alt="logo" />
+         </button>
       </div>
    </div>
 </main>

@@ -12,4 +12,7 @@ export class PostDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public sendComment() {
+    alert("Commentaire envoyé !");
+  }
 }
