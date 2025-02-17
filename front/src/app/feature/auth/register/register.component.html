@@ -1,30 +1,23 @@
-<main>
-    <div class="register__content">
-        <a class="backArrow" routerLink="/" routerLinkActive="currentPage">
-            <mat-icon>keyboard_backspace</mat-icon>
-        </a>
-        <h1 class="title">Inscription</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
+<div class="register__content">
+    <h1 class="title">Inscription</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
+        <div class="coupleInputLabel">
+            <label for="name">Nom d'utilisateur</label>
+            <input matInput formControlName="name" id="name">
+        </div>
 
-            <div class="coupleInputLabel">
-                <label for="name">Nom d'utilisateur</label>
-                <input matInput formControlName="name" id="name">
-            </div>
+        <div class="coupleInputLabel">
+            <label for="email">Adresse e-mail</label>
+            <input matInput formControlName="email" id="email">
+        </div>
+        <div class="coupleInputLabel">
+            <label for="password">Mot de passe</label>
+            <input matInput formControlName="password" id="password">
+        </div>
 
-            <div class="coupleInputLabel">
-                <label for="email">Adresse e-mail</label>
-                <input matInput formControlName="email" id="email">
-            </div>
-            <div class="coupleInputLabel">
-                <label for="password">Mot de passe</label>
-                <input matInput formControlName="password" id="password">
-            </div>
-
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
-                class="button button--primary">
-                S'inscrire
-            </button>
-
-        </form>
-    </div>
-</main>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
+            class="button button--primary">
+            S'inscrire
+        </button>
+    </form>
+</div>

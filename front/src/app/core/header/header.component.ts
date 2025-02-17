@@ -9,7 +9,7 @@ export class HeaderComponent implements OnInit {
 
   public displayMenu = false;
 
-  public isLogged = false;
+  public isLogged = true;
 
   constructor() { }
 

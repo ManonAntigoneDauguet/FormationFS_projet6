@@ -7,10 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 
 
 @NgModule({
   declarations: [
+    AuthLayoutComponent,
     LoginComponent,
     RegisterComponent
   ],

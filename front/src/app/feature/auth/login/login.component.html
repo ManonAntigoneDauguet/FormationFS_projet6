@@ -1,24 +1,18 @@
-<main>
-    <div class="login__content">
-        <a class="backArrow" routerLink="/" routerLinkActive="currentPage">
-            <mat-icon>keyboard_backspace</mat-icon>
-        </a>
-        <h1 class="title">Se connecter</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
+<div class="login__content">
+    <h1 class="title">Se connecter</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
+        <div class="coupleInputLabel">
+            <label for="email">E-mail ou nom d'utilisateur</label>
+            <input matInput formControlName="email" id="email">
+        </div>
+        <div class="coupleInputLabel">
+            <label for="password">Mot de passe</label>
+            <input matInput formControlName="password" id="password">
+        </div>
 
-            <div class="coupleInputLabel">
-                <label for="email">E-mail ou nom d'utilisateur</label>
-                <input matInput formControlName="email" id="email">
-            </div>
-            <div class="coupleInputLabel">
-                <label for="password">Mot de passe</label>
-                <input matInput formControlName="password" id="password">
-            </div>
-
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
-                class="button button--primary">
-                Se connecter
-            </button>
-        </form>
-    </div>
-</main>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
+            class="button button--primary">
+            Se connecter
+        </button>
+    </form>
+</div>

@@ -1,9 +1,4 @@
-.register__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 32px;
-    padding-top: 16px;
-    position: relative;
+:host {
+    display: block;
+    width: 100%;
 }

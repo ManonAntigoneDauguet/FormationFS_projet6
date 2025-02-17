@@ -1,0 +1,78 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.auth__content {
+    padding-top: 16px;
+    position: relative;
+
+    @include mobile-only {
+        padding-top: 32px;
+        row-gap: 0;
+    }
+}
+
+.logoContainer {
+    display: none;
+
+    @include mobile-only {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        @include mobile-only {
+            height: 130px;
+            width: 225px;
+        }
+    }
+}
+
+.backArrow {
+    color: black;
+    transform: scale(1.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/********************** register/login__content ***********************/
+:host ::ng-deep .register__content,
+:host ::ng-deep .login__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 16px;
+}
+
+:host ::ng-deep .authForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
+    width: 350px;
+    margin: auto;
+
+    @include mobile-only {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep .coupleInputLabel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    input {
+        color: gray;
+        box-sizing: border-box;
+        padding: 18px 16px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+}
