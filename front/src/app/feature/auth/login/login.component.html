@@ -3,11 +3,11 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="authForm">
         <div class="coupleInputLabel">
             <label for="email">E-mail ou nom d'utilisateur</label>
-            <input matInput formControlName="email" id="email">
+            <input class="input input--auth" matInput formControlName="email" id="email">
         </div>
         <div class="coupleInputLabel">
             <label for="password">Mot de passe</label>
-            <input matInput formControlName="password" id="password">
+            <input class="input input--auth" matInput formControlName="password" id="password">
         </div>
 
         <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">

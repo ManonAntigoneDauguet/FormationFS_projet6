@@ -1,6 +1,6 @@
 <main>
    <div class="postDetail__content">
-      <a class="backArrow" routerLink="/" routerLinkActive="currentPage">
+      <a class="backArrow" routerLink="/posts" routerLinkActive="currentPage">
          <mat-icon>keyboard_backspace</mat-icon>
       </a>
       <h1 class="title">Titre de l'article sélectionné</h1>
@@ -35,11 +35,12 @@
          </article>
       </div>
 
-      <div class="newComment commentsContainer">
-         <textarea id="comment" name="comment" placeholder="Ecrivez ici votre commentaire"></textarea>
-         <button class="sendButton" (click)="sendComment()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="newComment commentsContainer">
+         <textarea id="comment" name="comment" placeholder="Ecrivez ici votre commentaire"
+            formControlName="commentContent"></textarea>
+         <button class="sendButton" type="submit" [disabled]="form.invalid">
             <img src="/assets/send_comment.svg" alt="logo" />
          </button>
-      </div>
+      </form>
    </div>
 </main>

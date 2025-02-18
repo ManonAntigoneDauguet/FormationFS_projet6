@@ -1,3 +1,25 @@
 <main>
-    <p>profile works!</p>
+    <div class="profile__content">
+        <h1 class="title">Profil utilisateur</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="profileForm">
+
+            <input class="input input--primary" matInput id="username" formControlName="username">
+
+            <input class="input input--primary" matInput id="email" formControlName="email">
+
+            <div class="profileButtonContainer">
+                <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">
+                    Sauvegarder
+                </button>
+                <button (click)="logout()" class="logoutButton">
+                    Se déconnecter
+                </button>
+            </div>
+        </form>
+        <hr>
+        <div class="subscriptionContainer">
+            <h2 class="title">Abonnements</h2>
+            <app-topics-container></app-topics-container>
+        </div>
+    </div>
 </main>
