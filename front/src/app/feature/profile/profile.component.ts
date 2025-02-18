@@ -4,7 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { TopicsContainerComponent } from 'src/app/core/component/topics-container/topics-container.component';
+import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
+import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +42,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sessionUserService: SessionUserService
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public logout() {
-    alert("Vous êtes déconnecté !");
+    this.sessionUserService.logout();
     this.router.navigate(['/']);
   }
 }

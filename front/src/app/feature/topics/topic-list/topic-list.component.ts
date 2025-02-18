@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TopicsContainerComponent } from 'src/app/core/component/topics-container/topics-container.component';
+import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
 
 @Component({
   selector: 'app-topic-list',

@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
