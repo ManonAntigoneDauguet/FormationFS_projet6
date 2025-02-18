@@ -1,0 +1,30 @@
+<main>
+    <div class="postNew__content">
+        <a class="backArrow" routerLink="/posts" routerLinkActive="currentPage">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </a>
+        <h1 class="title">Créer un nouvel article</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="postForm">
+
+            <mat-select class="input input--primary" id="postTopic" name="postTopic" formControlName="postTopic">
+                <mat-option value="">Sélectionner un thème</mat-option>
+                <mat-option value="dog">Dog</mat-option>
+                <mat-option value="cat">Cat</mat-option>
+                <mat-option value="hamster">Hamster</mat-option>
+                <mat-option value="parrot">Parrot</mat-option>
+                <mat-option value="spider">Spider</mat-option>
+                <mat-option value="goldfish">Goldfish</mat-option>
+            </mat-select>
+
+            <textarea class="input input--primary" id="postTitle" name="postTitle" placeholder="Titre de l'article"
+                formControlName="postTitle"></textarea>
+
+            <textarea class="input input--primary" id="postContent" name="postContent"
+                placeholder="Contenu de l'article" formControlName="postContent"></textarea>
+
+            <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">
+                Créer
+            </button>
+        </form>
+    </div>
+</main>

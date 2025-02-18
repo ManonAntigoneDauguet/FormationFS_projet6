@@ -1,0 +1,75 @@
+<main>
+    <div class="postList__content">
+        <div class="postList__header">
+            <div class="newPostButtonContainer">
+                <button mat-raised-button class="button button--primary" routerLink="/posts/new">
+                    Créer un article
+                </button>
+            </div>
+            <button (click)="filterPosts()" class="filterPostsContainer">
+                <span class="subtitle">Trier par</span>
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+        </div>
+        <div class="postsContainer">
+            <article class="post" routerLink="/posts/1">
+                <div class="post__content">
+                    <h2 class="subtitle">Titre d'article</h2>
+                    <div class="postDataContainer">
+                        <span>Date</span>
+                        <span>Auteur</span>
+                    </div>
+                    <p>
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                    </p>
+                </div>
+                <a routerLink="/posts/1" class="postDetailLink"></a>
+            </article>
+            <article class="post">
+                <div class="post__content">
+                    <h2 class="subtitle">Titre d'article</h2>
+                    <div class="postDataContainer">
+                        <span>Date</span>
+                        <span>Auteur</span>
+                    </div>
+                    <p>
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled.
+                    </p>
+                </div>
+            </article>
+            <article class="post">
+                <div class="post__content">
+                    <h2 class="subtitle">Titre d'article</h2>
+                    <div class="postDataContainer">
+                        <span>Date</span>
+                        <span>Auteur</span>
+                    </div>
+                    <p>
+                        Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled
+                        lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
