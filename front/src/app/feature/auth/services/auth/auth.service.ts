@@ -15,11 +15,16 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public login(loginRequest: LoginRequest): Observable<SessionUser> {
-    console.log("données envoyées : ", JSON.stringify(loginRequest));
-    return this.http.post<SessionUser>(`${this.pathService}/login`, loginRequest, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true });
+    return this.http.post<SessionUser>(`${this.pathService}/login`, loginRequest, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true
+    });
   }
 
   public register(registerRequest: RegisterRequest): Observable<string> {
-    return this.http.post<string>(`${this.pathService}/register`, registerRequest);
+    return this.http.post(`${this.pathService}/register`, registerRequest, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text',
+      withCredentials: true
+    });
   }
 }

@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isLogged$ = this.sessionUserService.$isLogged();
+    this.isLogged$ = this.sessionUserService.isLogged$();
   }
 
   openMenu() {

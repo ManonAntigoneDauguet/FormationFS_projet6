@@ -15,6 +15,9 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  isError = false;
+  errorMessage = "error système"
+
   public form = this.formBuilder.group({
     username: [
       '',
@@ -52,19 +55,25 @@ export class RegisterComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
+      this.isError = false;
       const registerRequest = this.form.value as RegisterRequest;
-      console.log(registerRequest);
 
       this.authService.register(registerRequest).subscribe({
-        next: (response: string) => {
-          console.log(response);
+        next: () => {
           this.login();
+        },
+        error: (error) => {
+          this.isError = true;
+          if (error.status === 400) {
+            this.errorMessage = "Email déjà utilisé";
+          } else {
+            this.errorMessage = "Erreur système"
+          }
         }
       })
-      alert('Formulaire valide ✅');
-      console.log('Formulaire valide ✅', this.form.value);
     } else {
-      alert('Formulaire invalide ❌');
+      this.isError = true;
+      this.errorMessage = "'Formulaire invalide ❌";
     }
   }
 
@@ -73,14 +82,16 @@ export class RegisterComponent implements OnInit {
       email: this.form.value.email!,
       password: this.form.value.password!
     }
-    console.log(loginRequest);
 
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionUser) => {
         this.sessionUserService.login(response);
         this.router.navigate(['/profile']);
       },
-      error: error => alert('Erreur système')
+      error: () => {
+        this.isError = true;
+        this.errorMessage = "Erreur système"
+      }
     });
   }
 }

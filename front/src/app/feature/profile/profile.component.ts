@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
+import { User } from './interfaces/user.interface';
+import { ProfileService } from './services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,16 +25,18 @@ import { SessionUserService } from 'src/app/core/services/sessionUser/session-us
 })
 export class ProfileComponent implements OnInit {
 
+  public user!: User;
+
   public form = this.formBuilder.group({
     username: [
-      'Username',
+      '',
       [
         Validators.required,
         Validators.minLength(3)
       ]
     ],
     email: [
-      'email@test.fr',
+      '',
       [
         Validators.required,
         Validators.email
@@ -40,13 +44,31 @@ export class ProfileComponent implements OnInit {
     ]
   });
 
+  private initForm(): void {
+    this.form.setValue({
+      username: this.user.username,
+      email: this.user.email
+    });
+  }
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private sessionUserService: SessionUserService
+    private sessionUserService: SessionUserService,
+    private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  private fetchData(): void {
+    this.profileService.getProfile().subscribe({
+      next: (response: User) => {
+        this.user = response;
+        this.initForm();
+      }
+    })
   }
 
   public onSubmit() {

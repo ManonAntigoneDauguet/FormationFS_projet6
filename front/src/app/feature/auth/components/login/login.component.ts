@@ -14,6 +14,9 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  isError = false;
+  errorMessage = "error système"
+
   public form = this.formBuilder.group({
     email: [
       '',
@@ -44,18 +47,26 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
+      this.isError = false;
       const loginRequest = this.form.value as LoginRequest;
-      console.log(loginRequest);
 
       this.authService.login(loginRequest).subscribe({
         next: (response: SessionUser) => {
           this.sessionUserService.login(response);
           this.router.navigate(['/profile']);
         },
-        error: error => alert('Erreur système')
+        error: (error) => {
+          this.isError = true;
+          if (error.status === 401) {
+            this.errorMessage = "Identifiants incorrects";
+          } else {
+            this.errorMessage = "Erreur système"
+          }
+        }
       });
     } else {
-      alert('Formulaire invalide ❌');
+      this.isError = true;
+      this.errorMessage = "'Formulaire invalide ❌";
     }
   }
 }

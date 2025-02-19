@@ -7,26 +7,30 @@ import { SessionUser } from '../../interfaces/session-user.interface';
 })
 export class SessionUserService {
 
-  public isLogged = false;
-  public sessionUser: SessionUser | undefined;
-  
+  private TOKEN_KEY = 'token';
+  public isLogged: boolean = !!localStorage.getItem('token');
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
   constructor() { }
 
-  public $isLogged(): Observable<boolean> {
+  public isLogged$(): Observable<boolean> {
     return this.isLoggedSubject.asObservable();
   }
 
+  public getToken(): string | null {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    return token !== null ? token : null;
+  }
+
   public login(user: SessionUser): void {
-    this.sessionUser = user;
     this.isLogged = true;
+    localStorage.setItem(this.TOKEN_KEY, user.token);
     this.next();
   }
 
   public logout(): void {
-    this.sessionUser = undefined;
     this.isLogged = false;
+    localStorage.removeItem(this.TOKEN_KEY);
     this.next();
   }
 

@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.business.entity.User;
 import com.openclassrooms.mddapi.business.mapper.UserMapper;
 import com.openclassrooms.mddapi.common.DTO.apiRequest.UserRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
+import com.openclassrooms.mddapi.common.exception.SubscriberException;
 import com.openclassrooms.mddapi.configuration.security.UserDetailsImpl;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -72,6 +73,10 @@ public class UserService {
      * @param userRequestDTO as the new user to save
      */
     public void register(UserRequestDTO userRequestDTO) {
+        if (userRepository.findByEmail(userRequestDTO.getEmail()).isPresent()) {
+            throw new SubscriberException("This email is already saved");
+        }
+
         User user = userMapper.convertToEntity(userRequestDTO);
         user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
         userRepository.save(user);

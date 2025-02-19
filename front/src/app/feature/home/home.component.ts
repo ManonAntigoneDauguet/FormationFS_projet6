@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
 
 
 @Component({
@@ -15,15 +16,13 @@ import { MatButtonModule } from '@angular/material/button';
   ]
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(
+    private sessionUserService: SessionUserService,
+  ) { }
 
-  login() {
-    alert('Login !');
+  ngOnInit(): void {
+    this.sessionUserService.logout();
   }
 
-  register() {
-    alert('Register !');
-  }
 }
