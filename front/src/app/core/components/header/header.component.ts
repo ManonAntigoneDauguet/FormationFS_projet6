@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionUserService } from '../services/sessionUser/session-user.service';
 import { Observable } from 'rxjs';
+import { SessionUserService } from '../../services/sessionUser/session-user.service';
 
 @Component({
   selector: 'app-header',

@@ -3,28 +3,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { UnfoundComponent } from './feature/unfound/unfound.component';
 import { ProfileComponent } from './feature/profile/profile.component';
 import { HomeComponent } from './feature/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 
-// consider a guard combined with canLoad / canActivate route option
-// to manage unauthenticated user to access private routes
+
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: HomeComponent
   },
   {
     path: 'profile',
+    canActivate: [AuthGuard],
     component: ProfileComponent
   },
   {
     path: 'auth',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./feature/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'topics',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./feature/topics/topics.module').then(m => m.TopicsModule)
   },
   {
     path: 'posts',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./feature/posts/posts.module').then(m => m.PostModule)
   },
   {

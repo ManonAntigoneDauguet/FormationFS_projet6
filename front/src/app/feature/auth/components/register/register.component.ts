@@ -55,13 +55,13 @@ export class RegisterComponent implements OnInit {
       const registerRequest = this.form.value as RegisterRequest;
       console.log(registerRequest);
 
-      // this.authService.register(registerRequest).subscribe({
-      //   next: (response: string) => {
-          // console.log(response);
+      this.authService.register(registerRequest).subscribe({
+        next: (response: string) => {
+          console.log(response);
           this.login();
-      //   }
-      // })
-      // alert('Formulaire valide ✅');
+        }
+      })
+      alert('Formulaire valide ✅');
       console.log('Formulaire valide ✅', this.form.value);
     } else {
       alert('Formulaire invalide ❌');
@@ -75,20 +75,12 @@ export class RegisterComponent implements OnInit {
     }
     console.log(loginRequest);
 
-    // this.authService.login(loginRequest).subscribe({
-    //   next: (response: SessionUser) => {
-    //     this.sessionUserService.login(response);
-    //     this.router.navigate(['/profile']);
-    //   },
-    //   error: error => alert('Erreur système')
-    // });
-
-    /*******  Mocked version *********/
-    const response: SessionUser = {
-      token: "token"
-    }
-    this.sessionUserService.login(response);
-    this.router.navigate(['/profile']);
-    /********************************/
+    this.authService.login(loginRequest).subscribe({
+      next: (response: SessionUser) => {
+        this.sessionUserService.login(response);
+        this.router.navigate(['/profile']);
+      },
+      error: error => alert('Erreur système')
+    });
   }
 }

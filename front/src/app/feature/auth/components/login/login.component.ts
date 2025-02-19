@@ -47,21 +47,13 @@ export class LoginComponent implements OnInit {
       const loginRequest = this.form.value as LoginRequest;
       console.log(loginRequest);
 
-      // this.authService.login(loginRequest).subscribe({
-      //   next: (response: SessionUser) => {
-      //     this.sessionUserService.login(response);
-      //     this.router.navigate(['/profile']);
-      //   },
-      //   error: error => alert('Erreur système')
-      // });
-
-      /*******  Mocked version *********/
-      const response: SessionUser = {
-        token: "token"
-      }
-      this.sessionUserService.login(response);
-      this.router.navigate(['/profile']);
-      /********************************/
+      this.authService.login(loginRequest).subscribe({
+        next: (response: SessionUser) => {
+          this.sessionUserService.login(response);
+          this.router.navigate(['/profile']);
+        },
+        error: error => alert('Erreur système')
+      });
     } else {
       alert('Formulaire invalide ❌');
     }

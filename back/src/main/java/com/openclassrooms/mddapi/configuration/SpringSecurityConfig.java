@@ -56,7 +56,7 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // Remove for the prod
-                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedHandler))
                 .authorizeHttpRequests((auth) -> auth
@@ -77,13 +77,14 @@ public class SpringSecurityConfig {
      * @return
      */
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        corsConfiguration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "*"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "x-auth-token"));
+        corsConfiguration.setExposedHeaders(Arrays.asList("x-auth-token"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setMaxAge(3600L);
 
