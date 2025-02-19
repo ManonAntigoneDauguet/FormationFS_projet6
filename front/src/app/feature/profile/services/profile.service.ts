@@ -13,6 +13,9 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   public getProfile(): Observable<User> {
-    return this.http.get<User>(`${this.pathService}`);
+    return this.http.get<User>(
+      `${this.pathService}`, 
+      { withCredentials: true }
+    );
   }
 }

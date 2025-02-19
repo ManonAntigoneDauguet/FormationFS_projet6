@@ -1,0 +1,29 @@
+<main>
+    <div class="postList__content">
+        <div class="postList__header">
+            <div class="newPostButtonContainer">
+                <button mat-raised-button class="button button--primary" routerLink="/posts/new">
+                    Créer un article
+                </button>
+            </div>
+            <button (click)="filterPosts()" class="filterPostsContainer">
+                <span class="subtitle">Trier par</span>
+                <mat-icon class="filterArrow" [ngClass]="filterByDecrease ? 'filterArrow--decrease' : 'filterArrow--increase'">arrow_downward</mat-icon>
+            </button>
+        </div>
+        <div class="postsContainer">
+
+            <article *ngFor="let post of posts$ | async" class="post" routerLink="/posts/1">
+                <div class="post__content">
+                    <h2 class="subtitle">{{post.title}}</h2>
+                    <div class="postDataContainer">
+                        <span>{{post.createdAt}}</span>
+                        <span>{{post.author.username}}</span>
+                    </div>
+                    <p>{{post.content}}</p>
+                </div>
+                <a routerLink="/posts/1" class="postDetailLink"></a>
+            </article>
+        </div>
+    </div>
+</main>
