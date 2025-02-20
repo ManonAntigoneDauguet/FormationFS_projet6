@@ -62,17 +62,6 @@ export class ProfileComponent implements OnInit {
     this.fetchData();
   }
 
-  private fetchData(): void {
-    this.autService.getProfile().subscribe({
-      next: (response: User) => {
-        this.user = response;
-        this.initForm();
-        this.fetchTopicsSubscriber();
-      },
-      error: (e) => console.error(e)
-    })
-  }
-
   public onSubmit() {
     if (this.form.valid) {
       alert('Formulaire valide ✅');
@@ -93,6 +82,17 @@ export class ProfileComponent implements OnInit {
       email: this.user.email
     });
   }
+  
+  private fetchData(): void {
+    this.autService.getProfile().subscribe({
+      next: (response: User) => {
+        this.user = response;
+        this.initForm();
+        this.fetchTopicsSubscriber();
+      },
+      error: (e) => console.error(e)
+    })
+  }
 
   private fetchTopicsSubscriber() {
     if (this.user?.subscriptions?.length) {
@@ -100,5 +100,21 @@ export class ProfileComponent implements OnInit {
     } else {
       this.topics$ = new Observable<Topic[]>();
     }
+  }
+
+  public toUnsubscribe(topicId: number) {
+    this.topicService.toUnsubscribe(topicId).subscribe({
+      next: () => {
+        alert("Vous êtes désabonné !");
+        this.fetchData();
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          alert("Vous n'êtes pas abonné à ce thème");
+        } else {
+          alert("Erreur système")
+        }
+      }
+    });
   }
 }

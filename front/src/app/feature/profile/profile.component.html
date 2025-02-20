@@ -19,7 +19,8 @@
         <hr>
         <div class="subscriptionContainer">
             <h2 class="title">Abonnements</h2>
-            <app-topics-container [topics]="topics$ | async"></app-topics-container>
+            <app-topics-container [topics]="topics$ | async" 
+            (unsubscriptionEvent)="toUnsubscribe($event)"></app-topics-container>
         </div>
     </div>
 </main>

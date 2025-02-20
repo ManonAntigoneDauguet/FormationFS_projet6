@@ -3,9 +3,16 @@
         <div class="topic__content">
             <h2 class="subtitle">{{topic.name}}</h2>
             <p>{{topic.content}}</p>
-            <button mat-raised-button type="submit" class="button button--primary" (click)="toSubscribe()">
+
+            <button *ngIf="!topic.subscriber; else subscriber" mat-raised-button type="submit" class="button button--primary" (click)="toSubscribe(topic.id)">
                 S'abonner
             </button>
+
+            <ng-template #subscriber>
+                <button mat-raised-button type="submit" class="button button--primary" (click)="toUnSubscribe(topic.id)">
+                    Se désabonner
+                </button>
+            </ng-template>
         </div>
     </article>
 </div>
