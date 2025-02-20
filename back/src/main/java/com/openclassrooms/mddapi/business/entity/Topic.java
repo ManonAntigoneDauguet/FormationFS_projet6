@@ -16,6 +16,8 @@ public class Topic {
 
     private String name;
 
+    private String content;
+
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 

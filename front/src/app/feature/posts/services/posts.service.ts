@@ -14,7 +14,6 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
-
   public loadInitialData(): void {
     this.http.get<Post[]>(`${this.pathService}`, { withCredentials: true })
       .pipe(
@@ -30,7 +29,7 @@ export class PostsService {
       );
   }
 
-  public getAll(): Observable<Post[]> {
+  public getAllForUser(): Observable<Post[]> {
     return this.postsSubject.asObservable();
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionUser } from 'src/app/core/interfaces/session-user.interface';
+import { TokenApiResponse } from 'src/app/core/interfaces/token-api-response.interface';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { passwordValidator } from '../../passwordValidator';
@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
       const loginRequest = this.form.value as LoginRequest;
 
       this.authService.login(loginRequest).subscribe({
-        next: (response: SessionUser) => {
+        next: (response) => {
           this.sessionUserService.login(response);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/posts']);
         },
         error: (error) => {
           this.isError = true;

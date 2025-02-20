@@ -5,12 +5,12 @@ INSERT INTO `USERS` (`username`, `email`, `password`) VALUES
 ('Jafar', 'hades@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG'),
 ('Captain Hook', 'hook@mdd.com', '$2a$10$CqdSB2qIPXts6i22pqC1zulMYO6vZKo/2u5Hlx0RxDXsFjBD8DzrG');
 
-INSERT INTO `TOPICS` (`name`) VALUES
-('Intelligence Artificielle'),
-('Sécurité Informatique'),
-('Développement Web'),
-('Blockchain'),
-('Cloud Computing');
+INSERT INTO `TOPICS` (`name`, `content`) VALUES
+('Intelligence Artificielle', 'L\'Intelligence Artificielle donne aux machines des capacités humaines, comme la reconnaissance d\'image et les algorithmes prédictifs. Omniprésente, elle est fascinante mais aussi inquiétante, en constante évolution et parfois imprévisible.'),
+('Sécurité Informatique', 'La Sécurité Informatique est un combat entre hackers et experts. Chaque oubli de mot de passe ou mise à jour ignorée est une porte ouverte aux pirates. Cryptographie et firewalls sont nos armes contre les failles.'),
+('Développement Web', 'Le Développement Web est un défi de compatibilité entre navigateurs capricieux. HTML, CSS et JavaScript sont les outils, mais les versions obsolètes et l\'évolution des standards rendent chaque projet compliqué.'),
+('Blockchain', 'La Blockchain promet transparence et sécurité, mais aussi des arnaques et des spéculations. Elle fonctionne sans autorité centrale pour valider les transactions, mais elle présente de nouveaux risques.'),
+('Cloud Computing', 'Le Cloud Computing permet de stocker des données à distance, offrant flexibilité et accessibilité. Mais cela entraîne des préoccupations de confidentialité et une dépendance accrue aux géants du numérique.');
 
 INSERT INTO `USER_TOPIC_SUBSCRIPTIONS` (`user_id`, `topic_id`) VALUES
 (1, 1),

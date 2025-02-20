@@ -4,5 +4,5 @@ export interface User {
     id: number,
     username: string,
     email: string,
-    subscriptions: TopicSubscription
+    subscriptions: TopicSubscription[]
 }
