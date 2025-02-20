@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
+import { RegisterRequest } from '../auth/interfaces/registerRequest.interface';
 import { AuthService } from '../auth/services/auth/auth.service';
 import { TopicsService } from '../topics/services/topics.service';
 import { User } from './interfaces/user.interface';
@@ -30,6 +31,8 @@ import { User } from './interfaces/user.interface';
 })
 export class ProfileComponent implements OnInit {
 
+  isError = false;
+  errorMessage = "error système"
   public user!: User;
   public topics$: Observable<Topic[]> = new Observable<Topic[]>();
 
@@ -64,10 +67,27 @@ export class ProfileComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
-      alert('Formulaire valide ✅');
-      console.log('Formulaire valide ✅', this.form.value);
+      this.isError = false;
+      const updateRequest: RegisterRequest = {
+        email: this.form.value.email!,
+        username: this.form.value.username!,
+        password: ''
+      }
+
+      this.autService.updateProfile(updateRequest).subscribe({
+        error: (error) => {
+          this.isError = true;
+          if (error.status === 400) {
+            this.errorMessage = "Email déjà utilisé";
+          } else {
+            this.errorMessage = "Erreur système"
+          }
+        }
+      })
+
     } else {
-      alert('Formulaire invalide ❌');
+      this.isError = true;
+      this.errorMessage = "'Formulaire invalide ❌";
     }
   }
 
@@ -76,13 +96,28 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  public toUnsubscribe(topicId: number) {
+    this.topicService.toUnsubscribe(topicId).subscribe({
+      next: () => {
+        this.fetchData();
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          alert("Vous n'êtes pas abonné à ce thème");
+        } else {
+          alert("Erreur système")
+        }
+      }
+    });
+  }
+
   private initForm(): void {
     this.form.setValue({
       username: this.user.username,
       email: this.user.email
     });
   }
-  
+
   private fetchData(): void {
     this.autService.getProfile().subscribe({
       next: (response: User) => {
@@ -100,21 +135,5 @@ export class ProfileComponent implements OnInit {
     } else {
       this.topics$ = new Observable<Topic[]>();
     }
-  }
-
-  public toUnsubscribe(topicId: number) {
-    this.topicService.toUnsubscribe(topicId).subscribe({
-      next: () => {
-        alert("Vous êtes désabonné !");
-        this.fetchData();
-      },
-      error: (error) => {
-        if (error.status === 400) {
-          alert("Vous n'êtes pas abonné à ce thème");
-        } else {
-          alert("Erreur système")
-        }
-      }
-    });
   }
 }

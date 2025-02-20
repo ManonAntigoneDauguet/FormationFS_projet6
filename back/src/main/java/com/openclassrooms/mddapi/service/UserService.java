@@ -2,7 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.business.entity.User;
 import com.openclassrooms.mddapi.business.mapper.UserMapper;
-import com.openclassrooms.mddapi.common.DTO.apiRequest.UserRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.RegisterRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.UserUpdateRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
 import com.openclassrooms.mddapi.common.exception.SubscriberException;
 import com.openclassrooms.mddapi.configuration.security.UserDetailsImpl;
@@ -70,15 +71,15 @@ public class UserService {
      /**
      * Saves the new user
      *
-     * @param userRequestDTO as the new user to save
+     * @param registerRequestDTO as the new user to save
      */
-    public void register(UserRequestDTO userRequestDTO) {
-        if (userRepository.findByEmail(userRequestDTO.getEmail()).isPresent()) {
+    public void register(RegisterRequestDTO registerRequestDTO) {
+        if (userRepository.findByEmail(registerRequestDTO.getEmail()).isPresent()) {
             throw new SubscriberException("This email is already saved");
         }
 
-        User user = userMapper.convertToEntity(userRequestDTO);
-        user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+        User user = userMapper.convertToEntity(registerRequestDTO);
+        user.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
         userRepository.save(user);
     }
 
@@ -86,12 +87,11 @@ public class UserService {
      * Updates user information adn return the information needed to conserve login
      *
      * @param user           as old User
-     * @param userRequestDTO as UserRequestDTO
+     * @param userUpdateRequestDTO as UserRequestDTO
      */
-    public void updateUser(User user, UserRequestDTO userRequestDTO) {
-        user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
-        user.setUsername(userRequestDTO.getUsername());
-        user.setEmail(userRequestDTO.getEmail());
+    public void updateUser(User user, UserUpdateRequestDTO userUpdateRequestDTO) {
+        user.setUsername(userUpdateRequestDTO.getUsername());
+        user.setEmail(userUpdateRequestDTO.getEmail());
         userRepository.save(user);
     }
 

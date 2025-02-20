@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, forkJoin, map, Observable, ReplaySubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, forkJoin, map, Observable, tap } from 'rxjs';
 import { TopicApiResponse } from 'src/app/core/interfaces/topic-api-response.interface';
 import { TopicSubscription } from 'src/app/core/interfaces/topic-subscription.interface';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
@@ -12,19 +12,12 @@ export class TopicsService {
 
   private pathService = 'api/topic';
 
-  private topicsSubject = new ReplaySubject<Topic[]>(1)
+  private topicsSubject = new BehaviorSubject<Topic[]>([]);
 
   constructor(private http: HttpClient) { }
 
   private isSubscriber(topicId: number, listTopicsId: TopicSubscription[]): boolean {
-    let isSubscriber = false;
-    for (let topicsubscriber of listTopicsId) {
-      if (topicsubscriber.id == topicId) {
-        isSubscriber = true;
-        break;
-      }
-    }
-    return isSubscriber;
+    return listTopicsId.some(topicSub => topicSub.id === topicId);
   }
 
   private loadAll(listTopicsId: TopicSubscription[]): void {
@@ -38,7 +31,7 @@ export class TopicsService {
             subscriber: this.isSubscriber(data.id, listTopicsId)
           })
         )),
-        tap((value) => this.topicsSubject.next(value)),
+        tap((data) => this.topicsSubject.next(data)),
         catchError(() => {
           console.error("Erreur lors du chargement des posts");
           return EMPTY;
@@ -77,10 +70,30 @@ export class TopicsService {
   }
 
   public toSubscribe(topicId: number): Observable<string> {
-    return this.http.post(`${this.pathService}/${topicId}/subscribe`, {}, { responseType: 'text', withCredentials: true }) as Observable<string>;
+    return this.http.post(`${this.pathService}/${topicId}/subscribe`, {}, { responseType: 'text', withCredentials: true })
+      .pipe(
+        tap(() => {
+          const updatedTopics = this.topicsSubject.getValue()
+            .map(
+              topic => topic.id == topicId ? { ...topic, subscriber: true }
+                : topic
+            );
+          this.topicsSubject.next(updatedTopics);
+        })
+      );
   }
 
   public toUnsubscribe(topicId: number): Observable<string> {
-    return this.http.delete(`${this.pathService}/${topicId}/subscribe`, { responseType: 'text', withCredentials: true }) as Observable<string>;
+    return this.http.delete(`${this.pathService}/${topicId}/subscribe`, { responseType: 'text', withCredentials: true })
+    .pipe(
+      tap(() => {
+        const updatedTopics = this.topicsSubject.getValue()
+        .map(
+          topic => topic.id == topicId ? { ...topic, subscriber: false }
+          : topic
+        );
+        this.topicsSubject.next(updatedTopics);
+      })
+    );
   }
 }

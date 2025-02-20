@@ -30,9 +30,14 @@ export class AuthService {
   }
 
   public getProfile(): Observable<User> {
-    return this.http.get<User>(
-      `${this.pathService}`,
-      { withCredentials: true }
-    );
+    return this.http.get<User>(`${this.pathService}`, { withCredentials: true });
+  }
+
+  public updateProfile(registerRequest: RegisterRequest): Observable<string> {
+    return this.http.put(`${this.pathService}`, registerRequest, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text',
+      withCredentials: true
+    });
   }
 }

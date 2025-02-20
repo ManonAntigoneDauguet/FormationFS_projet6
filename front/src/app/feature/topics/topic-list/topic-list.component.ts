@@ -5,6 +5,7 @@ import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { AuthService } from '../../auth/services/auth/auth.service';
 import { User } from '../../profile/interfaces/user.interface';
 import { TopicsService } from '../services/topics.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-topic-list',
@@ -19,7 +20,7 @@ import { TopicsService } from '../services/topics.service';
 export class TopicListComponent implements OnInit {
 
   public user!: User;
-  public topics!: Topic[];
+  public topics$: Observable<Topic[]> = new Observable<Topic[]>();
 
   constructor(
     private topicService: TopicsService,
@@ -32,10 +33,6 @@ export class TopicListComponent implements OnInit {
 
   public toSubscribe(topicId: number) {
     this.topicService.toSubscribe(topicId).subscribe({
-      next: () => {
-        alert("Vous êtes abonné !");
-        this.fetchData();
-      },
       error: (error) => {
         console.error(error)
         if (error.status === 400) {
@@ -49,10 +46,6 @@ export class TopicListComponent implements OnInit {
 
   public toUnsubscribe(topicId: number) {
     this.topicService.toUnsubscribe(topicId).subscribe({
-      next: () => {
-        alert("Vous êtes désabonné !");
-        this.fetchData();
-      },
       error: (error) => {
         console.error(error)
         if (error.status === 400) {
@@ -75,11 +68,6 @@ export class TopicListComponent implements OnInit {
   }
 
   private fetchTopics() {
-    this.topicService.getAll(this.user.subscriptions).subscribe(
-      {
-        next: (data) => this.topics = data,
-        error: (e) => console.error(e)
-      }
-    );
+    this.topics$ = this.topicService.getAll(this.user.subscriptions);
   }
 }

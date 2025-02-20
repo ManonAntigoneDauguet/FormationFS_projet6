@@ -11,6 +11,7 @@
                 <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">
                     Sauvegarder
                 </button>
+                <span *ngIf="isError" class="formErrorMessage">{{errorMessage}}</span>
                 <button type="button" (click)="logout()" class="logoutButton">
                     Se déconnecter
                 </button>

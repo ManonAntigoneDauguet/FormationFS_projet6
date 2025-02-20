@@ -1,7 +1,7 @@
 <main>
     <div class="topicList__content">
         <div class="topicsContainer">
-            <app-topics-container [topics]="topics" (subscriptionEvent)="toSubscribe($event)"
+            <app-topics-container [topics]="topics$ | async" (subscriptionEvent)="toSubscribe($event)"
                 (unsubscriptionEvent)="toUnsubscribe($event)">
             </app-topics-container>
         </div>
