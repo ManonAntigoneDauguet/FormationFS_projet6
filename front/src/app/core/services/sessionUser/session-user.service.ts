@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/feature/profile/interfaces/user.interface';
-import { TokenApiResponse } from '../../interfaces/token-api-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +27,9 @@ export class SessionUserService {
     return this.userSubject.asObservable();
   }
 
-  public login(user: TokenApiResponse): void {
+  public login(token: string, user: User): void {
     this.isLogged = true;
-    localStorage.setItem(this.TOKEN_KEY, user.token);
+    localStorage.setItem(this.TOKEN_KEY, token);
     this.isLoggedSubject.next(this.isLogged);
   }
 

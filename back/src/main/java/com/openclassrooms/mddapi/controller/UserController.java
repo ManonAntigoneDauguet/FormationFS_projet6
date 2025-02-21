@@ -9,6 +9,7 @@ import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
 import com.openclassrooms.mddapi.configuration.security.JwtService;
 import com.openclassrooms.mddapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,13 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
         String token = jwtService.generateToken(authentication);
+        Cookie cookie = new Cookie("jwt_token", token);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 60 * 24);
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
+
         return ResponseEntity.ok(new ApiTokenResponse(token));
     }
 
@@ -58,15 +66,9 @@ public class UserController {
 
     @PutMapping("user")
     @Tag(name = "User")
-    public ResponseEntity<ApiTokenResponse> updateUser(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO, HttpServletResponse response) {
+    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
         User oldUser = userService.getUserEntityByAuthentication();
         userService.updateUser(oldUser, userUpdateRequestDTO);
-
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(userUpdateRequestDTO.getEmail());
-        loginRequest.setPassword(oldUser.getPassword());
-        System.out.println(oldUser.getPassword());
-
-        return login(loginRequest, response);
+        return ResponseEntity.ok("User correctly updated !");
     }
 }

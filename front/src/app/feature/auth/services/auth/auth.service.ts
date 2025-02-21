@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, EMPTY, map, Observable, switchMap } from 'rxjs';
 import { TokenApiResponse } from 'src/app/core/interfaces/token-api-response.interface';
 import { User } from 'src/app/feature/profile/interfaces/user.interface';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
@@ -15,10 +15,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(loginRequest: LoginRequest): Observable<TokenApiResponse> {
+  public login(loginRequest: LoginRequest): Observable<{ token: string, user: User }> {
     return this.http.post<TokenApiResponse>(`${this.pathService}/login`, loginRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true
-    });
+    }).pipe(
+      switchMap((tokenResponse) => {
+        return this.getProfile().pipe(
+          map((user) => ({
+            token: tokenResponse.token,
+            user: user
+          }))
+        );
+      }),
+      catchError(() => {
+        console.error("Erreur système");
+        return EMPTY;
+      })
+    );
   }
 
   public register(registerRequest: RegisterRequest): Observable<string> {

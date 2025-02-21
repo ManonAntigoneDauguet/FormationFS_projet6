@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(loginRequest).subscribe({
         next: (response) => {
-          this.sessionUserService.login(response);
+          this.sessionUserService.login(response.token, response.user);
           this.router.navigate(['/posts']);
         },
         error: (error) => {
