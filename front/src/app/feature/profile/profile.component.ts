@@ -68,6 +68,13 @@ export class ProfileComponent implements OnInit {
   public onSubmit() {
     if (this.form.valid) {
       this.isError = false;
+
+      if (this.user.email === this.form.value.email) {
+        this.isError = true;
+        this.errorMessage = "Aucun changement d'information";
+        return;
+      }
+
       const updateRequest: RegisterRequest = {
         email: this.form.value.email!,
         username: this.form.value.username!,
@@ -87,7 +94,7 @@ export class ProfileComponent implements OnInit {
 
     } else {
       this.isError = true;
-      this.errorMessage = "'Formulaire invalide ❌";
+      this.errorMessage = "Formulaire invalide ❌";
     }
   }
 

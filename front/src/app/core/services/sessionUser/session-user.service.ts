@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/feature/profile/interfaces/user.interface';
+import { TopicSubscription } from '../../interfaces/topic-subscription.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionUserService {
 
-  private TOKEN_KEY = 'token';
   public isLogged: boolean = !!localStorage.getItem('token');
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
   private userSubject = new BehaviorSubject<User | null>(null);
@@ -18,28 +18,23 @@ export class SessionUserService {
     return this.isLoggedSubject.asObservable();
   }
 
-  public getToken(): string | null {
-    const token = localStorage.getItem(this.TOKEN_KEY);
-    return token !== null ? token : null;
-  }
-
   public getUser$(): Observable<User | null> {
     return this.userSubject.asObservable();
   }
 
-  public login(token: string, user: User): void {
+  public login(user: User): void {
     this.isLogged = true;
-    localStorage.setItem(this.TOKEN_KEY, token);
     this.isLoggedSubject.next(this.isLogged);
+    this.userSubject.next(user);
   }
 
   public logout(): void {
     this.isLogged = false;
-    localStorage.removeItem(this.TOKEN_KEY);
     this.isLoggedSubject.next(this.isLogged);
+    this.userSubject.next(null);
   }
 
-  public loadUser(user: User) {
+  public updateUser(user: User) {
     this.userSubject.next(user);
   }
 }

@@ -30,6 +30,7 @@ export class PostsService {
   }
 
   public getAllForUser(): Observable<Post[]> {
+    this.loadInitialData();
     return this.postsSubject.asObservable();
   }
 

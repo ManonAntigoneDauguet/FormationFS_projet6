@@ -7,6 +7,7 @@ import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { RegisterRequest } from '../../interfaces/registerRequest.interface';
 import { passwordValidator } from '../../passwordValidator';
 import { AuthService } from '../../services/auth/auth.service';
+import { User } from 'src/app/feature/profile/interfaces/user.interface';
 
 @Component({
   selector: 'app-register',
@@ -84,8 +85,8 @@ export class RegisterComponent implements OnInit {
     }
 
     this.authService.login(loginRequest).subscribe({
-      next: (response) => {
-        this.sessionUserService.login(response.token, response.user);
+      next: (response: User) => {
+        this.sessionUserService.login(response);
         this.router.navigate(['/posts']);
       },
       error: () => {

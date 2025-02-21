@@ -15,21 +15,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(loginRequest: LoginRequest): Observable<{ token: string, user: User }> {
+  public login(loginRequest: LoginRequest): Observable<User> {
     return this.http.post<TokenApiResponse>(`${this.pathService}/login`, loginRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true
     }).pipe(
       switchMap((tokenResponse) => {
-        return this.getProfile().pipe(
-          map((user) => ({
-            token: tokenResponse.token,
-            user: user
-          }))
-        );
-      }),
-      catchError(() => {
-        console.error("Erreur système");
-        return EMPTY;
+        return this.getProfile()
       })
     );
   }

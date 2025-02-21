@@ -6,6 +6,7 @@ import { SessionUserService } from 'src/app/core/services/sessionUser/session-us
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { passwordValidator } from '../../passwordValidator';
 import { AuthService } from '../../services/auth/auth.service';
+import { User } from 'src/app/feature/profile/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -51,8 +52,8 @@ export class LoginComponent implements OnInit {
       const loginRequest = this.form.value as LoginRequest;
 
       this.authService.login(loginRequest).subscribe({
-        next: (response) => {
-          this.sessionUserService.login(response.token, response.user);
+        next: (user: User) => {
+          this.sessionUserService.login(user);
           this.router.navigate(['/posts']);
         },
         error: (error) => {
