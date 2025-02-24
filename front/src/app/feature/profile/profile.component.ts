@@ -5,8 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap, take, tap } from 'rxjs';
 import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
+import { TopicSubscription } from 'src/app/core/interfaces/topic-subscription.interface';
 import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
 import { RegisterRequest } from '../auth/interfaces/registerRequest.interface';
@@ -103,17 +104,22 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  public toUnsubscribe(topicId: number) {
-    this.topicService.toUnsubscribe(topicId).subscribe({
+  public toUnsubscribe(newSubscription: TopicSubscription) {
+    this.topicService.toUnsubscribe(newSubscription.id).subscribe({
       next: () => {
-        this.fetchData();
+        const newListSubscription: TopicSubscription[] = this.user.subscriptions.filter(
+          subscription => subscription.id != newSubscription.id
+        )
+        this.user = { ...this.user, subscriptions: newListSubscription };
+        this.sessionUserService.updateUser(
+          this.user
+        );
       },
+
       error: (error) => {
-        if (error.status === 400) {
-          alert("Vous n'êtes pas abonné à ce thème");
-        } else {
-          alert("Erreur système")
-        }
+        console.error(error)
+        error.status === 400 ? alert("Vous n'êtes pas abonné à ce thème")
+          : alert("Erreur système");
       }
     });
   }
@@ -126,21 +132,30 @@ export class ProfileComponent implements OnInit {
   }
 
   private fetchData(): void {
-    this.autService.getProfile().subscribe({
-      next: (response: User) => {
-        this.user = response;
-        this.initForm();
-        this.fetchTopicsSubscriber();
-      },
-      error: (e) => console.error(e)
-    })
-  }
+    this.sessionUserService.getUser$().pipe(
+      take(1),
+      switchMap((user) => {
+        if (user) {
+          this.user = user;
+          return this.topicService.getAllTopicsForUser(this.user.subscriptions);
 
-  private fetchTopicsSubscriber() {
-    if (this.user?.subscriptions?.length) {
-      this.topics$ = this.topicService.getAllTopicsForUser(this.user.subscriptions);
-    } else {
-      this.topics$ = new Observable<Topic[]>();
-    }
+        } else {
+          return this.autService.getProfile().pipe(
+            tap((fetchedUser) => {
+              this.user = fetchedUser;
+              this.sessionUserService.updateUser(fetchedUser);
+            }),
+            switchMap(() => this.topicService.getAllTopicsForUser(this.user.subscriptions)
+            )
+          )
+        }
+      })
+    ).subscribe({
+      next: (topics) => {
+        this.topics$ = of(topics);
+        this.initForm();
+      },
+      error: (error) => console.error(error)
+    });
   }
 }

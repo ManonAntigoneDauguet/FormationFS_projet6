@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TopicSubscription } from '../../interfaces/topic-subscription.interface';
 import { Topic } from '../../interfaces/topic.interface';
 
 @Component({
@@ -14,19 +15,25 @@ import { Topic } from '../../interfaces/topic.interface';
 export class TopicsContainerComponent implements OnInit {
 
   @Input() topics?: Topic[] | null;
-  @Output() subscriptionEvent = new EventEmitter<number>();
-  @Output() unsubscriptionEvent = new EventEmitter<number>();
+  @Output() subscriptionEvent = new EventEmitter<TopicSubscription>();
+  @Output() unsubscriptionEvent = new EventEmitter<TopicSubscription>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public toSubscribe(topicId: number) {
-    this.subscriptionEvent.emit(topicId);
+  public toSubscribe(topicId: number, topicName: string) {
+    this.subscriptionEvent.emit({
+      id: topicId,
+      name: topicName
+    });
   }
 
-  public toUnSubscribe(topicId: number) {
-    this.unsubscriptionEvent.emit(topicId);
+  public toUnSubscribe(topicId: number, topicName: string) {
+    this.unsubscriptionEvent.emit({
+      id: topicId,
+      name: topicName
+    });
   }
 }
