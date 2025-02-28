@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TokenApiResponse } from 'src/app/core/interfaces/token-api-response.interface';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
+import { User } from 'src/app/feature/profile/interfaces/user.interface';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { RegisterRequest } from '../../interfaces/registerRequest.interface';
 import { passwordValidator } from '../../passwordValidator';
-import { AuthService } from '../../services/auth/auth.service';
-import { User } from 'src/app/feature/profile/interfaces/user.interface';
 
 @Component({
   selector: 'app-register',

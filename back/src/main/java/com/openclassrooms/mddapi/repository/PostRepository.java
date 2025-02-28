@@ -11,10 +11,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findByOrderByCreatedAtDesc();
-
-    List<Post> findByTopicIdOrderByCreatedAtDesc(Long topicId);
-
     @Query("SELECT p FROM Post p WHERE p.topic IN " +
             "(SELECT t FROM User u JOIN u.subscriptions t WHERE u.id = :userId) " +
             "ORDER BY p.createdAt DESC")

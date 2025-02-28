@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Topic } from '../../../feature/topics/interfaces/topic.interface';
 import { TopicSubscription } from '../../interfaces/topic-subscription.interface';
-import { Topic } from '../../interfaces/topic.interface';
 
 @Component({
   selector: 'app-topics-container',

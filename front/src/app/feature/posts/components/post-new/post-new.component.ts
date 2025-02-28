@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Topic } from 'src/app/core/interfaces/topic.interface';
+import { Subscription } from 'rxjs';
+import { Topic } from 'src/app/feature/topics/interfaces/topic.interface';
 import { TopicsService } from 'src/app/feature/topics/services/topics.service';
 import { PostRequest } from '../../interfaces/postRequest.interface';
 import { PostsService } from '../../services/posts.service';
-import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
