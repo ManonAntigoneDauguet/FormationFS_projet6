@@ -2,12 +2,15 @@ package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.business.entity.User;
 import com.openclassrooms.mddapi.common.DTO.apiRequest.LoginRequest;
-import com.openclassrooms.mddapi.common.DTO.apiRequest.UserRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.RegisterRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.UserUpdateRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.ApiTokenResponse;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
 import com.openclassrooms.mddapi.configuration.security.JwtService;
 import com.openclassrooms.mddapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,18 +35,21 @@ public class UserController {
 
     @PostMapping("user/register")
     @Tag(name = "User")
-    public ResponseEntity<String> register(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        userService.register(userRequestDTO);
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
+        userService.register(registerRequestDTO);
         return ResponseEntity.ok("User correctly saved !");
     }
 
     @PostMapping("user/login")
     @Tag(name = "User")
-    public ResponseEntity<ApiTokenResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<ApiTokenResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
+
         String token = jwtService.generateToken(authentication);
+        jwtService.getCookieFromToken(token, response);
+
         return ResponseEntity.ok(new ApiTokenResponse(token));
     }
 
@@ -56,9 +62,13 @@ public class UserController {
 
     @PutMapping("user")
     @Tag(name = "User")
-    public ResponseEntity<String> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO, HttpServletResponse response) {
         User oldUser = userService.getUserEntityByAuthentication();
-        userService.updateUser(oldUser, userRequestDTO);
+        userService.updateUser(oldUser, userUpdateRequestDTO);
+
+        String token = jwtService.generateToken(userUpdateRequestDTO.getEmail());
+        jwtService.getCookieFromToken(token, response);
+
         return ResponseEntity.ok("User correctly updated !");
     }
 }

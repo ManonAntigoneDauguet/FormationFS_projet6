@@ -11,7 +11,8 @@
                 <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">
                     Sauvegarder
                 </button>
-                <button (click)="logout()" class="logoutButton">
+                <span *ngIf="isError" class="formErrorMessage">{{errorMessage}}</span>
+                <button type="button" (click)="logout()" class="logoutButton">
                     Se déconnecter
                 </button>
             </div>
@@ -19,7 +20,8 @@
         <hr>
         <div class="subscriptionContainer">
             <h2 class="title">Abonnements</h2>
-            <app-topics-container></app-topics-container>
+            <app-topics-container [topics]="topics$ | async" 
+            (unsubscriptionEvent)="toUnsubscribe($event)"></app-topics-container>
         </div>
     </div>
 </main>

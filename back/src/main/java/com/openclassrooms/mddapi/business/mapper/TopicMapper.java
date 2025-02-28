@@ -20,6 +20,7 @@ public class TopicMapper {
         TopicResponseDTO responseDTO = new TopicResponseDTO();
         responseDTO.setId(topic.getId());
         responseDTO.setName(topic.getName());
+        responseDTO.setContent(topic.getContent());
 
         return responseDTO;
     }

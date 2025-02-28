@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.configuration.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -32,8 +32,8 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     /**
      * Checks if the token is valid and allows it utilisation for authentication
      *
-     * @param request as HttpServletRequest
-     * @param response as HttpServletResponse
+     * @param request     as HttpServletRequest
+     * @param response    as HttpServletResponse
      * @param filterChain as FilterChain
      * @throws ServletException
      * @throws IOException
@@ -68,11 +68,13 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @return the JWT token extracted from the Authorization header, or null if not present
      */
     private String parseJwt(HttpServletRequest request) {
-        String headerAuth = request.getHeader("Authorization");
+        String jwtToken = null;
 
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("jwt_token")) {
+                jwtToken = cookie.getValue();
+            }
         }
-        return null;
+        return jwtToken;
     }
 }

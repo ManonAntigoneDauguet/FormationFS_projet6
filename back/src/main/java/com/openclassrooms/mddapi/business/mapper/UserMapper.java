@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.business.mapper;
 
 import com.openclassrooms.mddapi.business.entity.User;
-import com.openclassrooms.mddapi.common.DTO.apiRequest.UserRequestDTO;
+import com.openclassrooms.mddapi.common.DTO.apiRequest.RegisterRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.ShortUserResponseDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,13 @@ public class UserMapper {
     /**
      * Converts a UserDTO object to a User object
      *
-     * @param userRequestDTO as the UserDTO to convert
+     * @param registerRequestDTO as the UserDTO to convert
      * @return User
      */
-    public User convertToEntity(UserRequestDTO userRequestDTO) {
+    public User convertToEntity(RegisterRequestDTO registerRequestDTO) {
         User user = new User();
-        user.setUsername(userRequestDTO.getUsername());
-        user.setEmail(userRequestDTO.getEmail());
+        user.setUsername(registerRequestDTO.getUsername());
+        user.setEmail(registerRequestDTO.getEmail());
 
         return user;
     }

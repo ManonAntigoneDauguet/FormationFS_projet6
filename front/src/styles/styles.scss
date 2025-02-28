@@ -69,6 +69,7 @@ h2.subtitle {
     &--secondary {
         color: black;
         background-color: white;
+        min-width: 180px;
     }
 }
 
@@ -110,4 +111,9 @@ h2.subtitle {
         padding: 18px 16px;
     }
 
+}
+
+.formErrorMessage {
+    color: red;
+    text-align: center;
 }

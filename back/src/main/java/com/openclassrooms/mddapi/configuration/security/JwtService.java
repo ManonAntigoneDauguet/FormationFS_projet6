@@ -6,6 +6,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,8 +56,28 @@ public class JwtService {
      */
     public String generateToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        return buildToken((userPrincipal.getEmail()));
+    }
+
+    /**
+     * Creates a token with the connected user's information
+     *
+     * @param email as String
+     * @return String
+     */
+    public String generateToken(String email) {
+        return buildToken(email);
+    }
+
+    /**
+     * Creates a token
+     *
+     * @param email as String
+     * @return String
+     */
+    private String buildToken(String email) {
         return Jwts.builder()
-                .setSubject((userPrincipal.getEmail()))
+                .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key(), SignatureAlgorithm.HS256)
@@ -80,5 +102,20 @@ public class JwtService {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
         return false;
+    }
+
+    /**
+     * Get cookie with token
+     *
+     * @param token    as String
+     * @param response as HttpServletResponse
+     */
+    public void getCookieFromToken(String token, HttpServletResponse response) {
+        Cookie cookie = new Cookie("jwt_token", token);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 60 * 24);
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
     }
 }
