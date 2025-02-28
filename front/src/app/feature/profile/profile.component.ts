@@ -8,10 +8,10 @@ import { Router, RouterLink } from '@angular/router';
 import { Observable, of, switchMap, take, tap } from 'rxjs';
 import { TopicsContainerComponent } from 'src/app/core/components/topics-container/topics-container.component';
 import { TopicSubscription } from 'src/app/core/interfaces/topic-subscription.interface';
-import { Topic } from 'src/app/core/interfaces/topic.interface';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
+import { Topic } from 'src/app/feature/topics/interfaces/topic.interface';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { RegisterRequest } from '../auth/interfaces/registerRequest.interface';
-import { AuthService } from '../auth/services/auth/auth.service';
 import { TopicsService } from '../topics/services/topics.service';
 import { User } from './interfaces/user.interface';
 

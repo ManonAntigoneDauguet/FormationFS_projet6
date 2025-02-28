@@ -29,15 +29,6 @@ public class PostService {
     }
 
     /**
-     * Gets all posts ordered by chronology
-     *
-     * @return Iterable<PostResponseDTO>
-     */
-    public Iterable<PostResponseDTO> getPosts() {
-        return postMapper.convertAllToResponseDTO(postRepository.findByOrderByCreatedAtDesc());
-    }
-
-    /**
      * Gets all posts about topics that the user is subscriber
      *
      * @return Iterable<PostResponseDTO>
@@ -45,16 +36,6 @@ public class PostService {
     public Iterable<PostResponseDTO> getPostsBySubscription() {
         User subscriber = userService.getUserEntityByAuthentication();
         return postMapper.convertAllToResponseDTO(postRepository.findPostsByUserSubscriptions(subscriber.getId()));
-    }
-
-    /**
-     * Gets all posts of a specified topic, ordered by chronology
-     *
-     * @param id as topic id
-     * @return Iterable<PostResponseDTO>
-     */
-    public Iterable<PostResponseDTO> getPostsByTopic(Long id) {
-        return postMapper.convertAllToResponseDTO(postRepository.findByTopicIdOrderByCreatedAtDesc(id));
     }
 
     /**

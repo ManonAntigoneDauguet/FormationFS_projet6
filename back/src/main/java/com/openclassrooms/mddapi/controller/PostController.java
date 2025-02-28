@@ -24,17 +24,9 @@ public class PostController {
         this.commentService = commentService;
     }
 
-    @GetMapping("post")
-    @Tag(name = "Post")
-    @Operation(summary = "Get all posts", description = "Get a list of all posts")
-    public ResponseEntity<Iterable<PostResponseDTO>> getPosts() {
-        Iterable<PostResponseDTO> list = postService.getPosts();
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping("post/subscriber")
     @Tag(name = "Post")
-    @Operation(summary = "Get all posts", description = "Get a list of all posts")
+    @Operation(summary = "Gets all posts about topics that the user is subscriber", description = "Get a list of all posts about topics that the user is subscriber")
     public ResponseEntity<Iterable<PostResponseDTO>> getPostsBySubscription() {
         Iterable<PostResponseDTO> list = postService.getPostsBySubscription();
         return ResponseEntity.ok(list);

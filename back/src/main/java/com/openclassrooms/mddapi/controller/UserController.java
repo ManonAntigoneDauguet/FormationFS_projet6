@@ -9,7 +9,6 @@ import com.openclassrooms.mddapi.common.DTO.apiResponse.UserResponseDTO;
 import com.openclassrooms.mddapi.configuration.security.JwtService;
 import com.openclassrooms.mddapi.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +32,13 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
+    @GetMapping("user")
+    @Tag(name = "User")
+    public ResponseEntity<UserResponseDTO> getUser() {
+        UserResponseDTO user = userService.getUserDTOByAuthentication();
+        return ResponseEntity.ok(user);
+    }
+
     @PostMapping("user/register")
     @Tag(name = "User")
     public ResponseEntity<String> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
@@ -51,13 +57,6 @@ public class UserController {
         jwtService.getCookieFromToken(token, response);
 
         return ResponseEntity.ok(new ApiTokenResponse(token));
-    }
-
-    @GetMapping("user")
-    @Tag(name = "User")
-    public ResponseEntity<UserResponseDTO> getUser() {
-        UserResponseDTO user = userService.getUserDTOByAuthentication();
-        return ResponseEntity.ok(user);
     }
 
     @PutMapping("user")

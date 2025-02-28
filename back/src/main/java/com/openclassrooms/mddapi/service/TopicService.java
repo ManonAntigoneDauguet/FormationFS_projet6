@@ -41,16 +41,6 @@ public class TopicService {
     }
 
     /**
-     * Finds the topic by id adn return TopicResponseDTO
-     *
-     * @param id as topic id
-     * @return TopicResponseDTO
-     */
-    public TopicResponseDTO getTopicResponseDTOByID(Long id) {
-        return topicMapper.convertToResponseDTO(getTopicEntityByID(id));
-    }
-
-    /**
      * Gets all topics
      *
      * @return List<TopicResponseDTO>
