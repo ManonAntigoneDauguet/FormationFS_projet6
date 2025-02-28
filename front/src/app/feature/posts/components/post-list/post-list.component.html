@@ -13,7 +13,7 @@
         </div>
         <div class="postsContainer">
 
-            <article *ngFor="let post of posts$ | async" class="post" routerLink="/posts/1">
+            <article *ngFor="let post of posts$ | async" class="post">
                 <div class="post__content">
                     <h2 class="subtitle">{{post.title}}</h2>
                     <div class="postDataContainer">
@@ -22,7 +22,7 @@
                     </div>
                     <p>{{post.content}}</p>
                 </div>
-                <a routerLink="/posts/1" class="postDetailLink"></a>
+                <a [routerLink]="['/posts', post.id]" class="postDetailLink"></a>
             </article>
         </div>
     </div>

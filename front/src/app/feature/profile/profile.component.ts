@@ -33,7 +33,7 @@ import { User } from './interfaces/user.interface';
 export class ProfileComponent implements OnInit {
 
   isError = false;
-  errorMessage = "error système"
+  errorMessage = "error système";
   public user!: User;
   public topics$: Observable<Topic[]> = new Observable<Topic[]>();
 

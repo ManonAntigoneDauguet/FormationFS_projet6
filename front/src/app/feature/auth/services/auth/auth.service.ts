@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post<TokenApiResponse>(`${this.pathService}/login`, loginRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true
     }).pipe(
-      switchMap((tokenResponse) => {
+      switchMap(() => {
         return this.getProfile()
       })
     );

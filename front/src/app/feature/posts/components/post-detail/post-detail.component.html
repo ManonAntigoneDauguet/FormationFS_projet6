@@ -1,37 +1,25 @@
 <main>
-   <div class="postDetail__content">
+   <div *ngIf="post$ | async as post" class="postDetail__content">
       <a class="backArrow" routerLink="/posts" routerLinkActive="currentPage">
          <mat-icon>keyboard_backspace</mat-icon>
       </a>
-      <h1 class="title">Titre de l'article sélectionné</h1>
+      <h1 class="title">{{post.title}}</h1>
       <div class="postDataContainer">
          <div class="postDataContainer--1">
-            <span>Date</span>
-            <span>Auteur</span>
+            <span>{{post.createdAt}}</span>
+            <span>{{post.author.username}}</span>
          </div>
-         <span class="postDataContainer--1">Thème</span>
+         <span class="postDataContainer--1">{{post.topic.name}}</span>
       </div>
-      <p>
-         Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-         has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-         galley of type and scrambled
-      </p>
+      <p>{{post.content}}</p>
 
       <hr>
 
       <h2 class="commentTitlePart">Commentaires</h2>
       <div class="commentsContainer">
-         <article class="comment">
-            <p class="username">username</p>
-            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
-         </article>
-         <article class="comment">
-            <p class="username">username</p>
-            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
-         </article>
-         <article class="comment">
-            <p class="username">username</p>
-            <p class="content">contenu du commentairfffffffffffeeeeeeee eeeee </p>
+         <article *ngFor="let comment of comments$ | async" class="comment">
+            <p class="username">{{ comment.author.username }}</p>
+            <p class="content">{{ comment.content }}</p>
          </article>
       </div>
 
@@ -41,6 +29,7 @@
          <button class="sendButton" type="submit" [disabled]="form.invalid">
             <img src="/assets/send_comment.svg" alt="logo" />
          </button>
+         <span *ngIf="isError" class="formErrorMessage">{{errorMessage}}</span>
       </form>
    </div>
 </main>

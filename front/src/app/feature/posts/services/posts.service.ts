@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, Observable, ReplaySubject } from 'rxjs';
-import { Post } from '../interfaces/post.interface';
 import { TopicSubscription } from 'src/app/core/interfaces/topic-subscription.interface';
+import { PostComment } from '../interfaces/comment.interface';
+import { Post } from '../interfaces/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,23 @@ export class PostsService {
         })
       );
   }
+
+  public getAllCommentsForPost(id: string): Observable<PostComment[]> {
+    return this.http.get<PostComment[]>(`${this.pathService}/${id}/comment`, { withCredentials: true })
+      .pipe(
+        catchError(() => {
+          console.error("Erreur lors du chargement du post");
+          return EMPTY;
+        })
+      );
+  }
+
+    public saveComment(id: string, newComment: {content: string}): Observable<string> {
+      return this.http.post(`${this.pathService}/${id}/comment`, newComment, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'text',
+        withCredentials: true
+      });
+    }
 
 }
