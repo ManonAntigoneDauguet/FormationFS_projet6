@@ -1,4 +1,119 @@
-/* You can add global styles to this file, and also import other style files */
+@import './variables';
+@import './mixins';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+    height: 100dvh;
+    position: relative;
+}
+
+main {
+    @include core-container;
+}
+
+p,
+span,
+input {
+    font-size: 14px;
+}
+
+h1.title, .title, h2.title {
+    text-align: center;
+    font-size: 24px;
+}
+
+.subtitle,
+h2.subtitle {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.button.button {
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: block;
+    padding: 8px 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-wrap: nowrap;
+    font-weight: bold;
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    span {
+        font-size: 16px;
+    }
+
+    @include mobile-only {
+        font-weight: 300;
+    }
+
+    &--primary {
+        border: none;
+        color: white;
+        background-color: $primary-color;
+    }
+
+    &--secondary {
+        color: black;
+        background-color: white;
+        min-width: 180px;
+    }
+}
+
+.backArrow {
+    color: black;
+    transform: scale(1.7);
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.input {
+    color: gray;
+    box-sizing: border-box;
+    padding: 18px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+
+    &--primary {
+        border: 2px solid $primary-color;
+        padding: 8px;
+        font-size: 20px;
+        height: 48px;
+        display: block;
+
+        @include mobile-only {
+            width: 100%;
+        }
+    }
+
+    &-auth {
+        font-size: 16px;
+        padding: 18px 16px;
+    }
+
+}
+
+.formErrorMessage {
+    color: red;
+    text-align: center;
+}

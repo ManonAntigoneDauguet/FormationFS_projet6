@@ -1,0 +1,18 @@
+<div class="topicsContainer">
+    <article *ngFor="let topic of topics" class="topic">
+        <div class="topic__content">
+            <h2 class="subtitle">{{topic.name}}</h2>
+            <p>{{topic.content}}</p>
+
+            <button *ngIf="!topic.subscriber; else subscriber" mat-raised-button type="submit" class="button button--primary" (click)="toSubscribe(topic.id, topic.name)">
+                S'abonner
+            </button>
+
+            <ng-template #subscriber>
+                <button mat-raised-button type="submit" class="button button--primary" (click)="toUnSubscribe(topic.id, topic.name)">
+                    Se désabonner
+                </button>
+            </ng-template>
+        </div>
+    </article>
+</div>

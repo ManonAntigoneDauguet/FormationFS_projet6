@@ -1,0 +1,28 @@
+<header>
+    <div class="header__content" [ngClass]="{'header__content--notLogged': !isLogged$}">
+        <div class="logoContainer">
+            <img class="logo" src="/assets/logo_p6.png" alt="logo" />
+        </div>
+
+        <button *ngIf="isLogged$ | async" mat-icon-button (click)="openMenu()" class="menuIcon">
+            <mat-icon fontIcon="menu" class="mat-icon-medium"></mat-icon>
+        </button>
+
+        <nav *ngIf="isLogged$ | async" class="nav" [ngClass]="{'invisibleNav': !displayMenu}">
+            <aside class="nav__background nav__background--blured"></aside>
+            <aside class="nav__background nav__background--white"></aside>
+            <a class="navLink" routerLink="/posts" routerLinkActive="currentPage">
+                Articles
+            </a>
+            <a class="navLink" routerLink="/topics" routerLinkActive="currentPage">
+                Thèmes
+            </a>
+            <a class="navLink navLink--account" routerLink="profile" routerLinkActive="currentPage">
+                <div class="accountIconBackgound"></div>
+                <img src="assets/icon_user.svg" alt="Compte" class="accountIcon--no-currentPage">
+                <img src="assets/icon_user-activeLink.svg" alt="Compte" class="accountIcon--currentPage">
+            </a>
+        </nav>
+    </div>
+    <hr>
+</header>
