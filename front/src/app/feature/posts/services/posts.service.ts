@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, Observable, ReplaySubject } from 'rxjs';
 import { Post } from '../interfaces/post.interface';
+import { TopicSubscription } from 'src/app/core/interfaces/topic-subscription.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class PostsService {
       );
   }
 
-  public getAllForUser(): Observable<Post[]> {
+  public getAllPostsForUser(listTopicsId: TopicSubscription[]): Observable<Post[]> {
     this.loadInitialData();
     return this.postsSubject.asObservable();
   }

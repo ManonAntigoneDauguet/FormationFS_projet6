@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
               this.user = fetchedUser;
               this.sessionUserService.updateUser(fetchedUser);
             }),
-            switchMap(() => this.topicService.getAllTopicsForUser(this.user.subscriptions)
+            switchMap((fetchedUser) => this.topicService.getAllTopicsForUser(fetchedUser.subscriptions)
             )
           )
         }
