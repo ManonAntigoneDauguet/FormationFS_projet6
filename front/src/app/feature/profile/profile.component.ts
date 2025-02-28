@@ -70,12 +70,6 @@ export class ProfileComponent implements OnInit {
     if (this.form.valid) {
       this.isError = false;
 
-      if (this.user.email === this.form.value.email) {
-        this.isError = true;
-        this.errorMessage = "Aucun changement d'information";
-        return;
-      }
-
       const updateRequest: RegisterRequest = {
         email: this.form.value.email!,
         username: this.form.value.username!,
@@ -83,6 +77,10 @@ export class ProfileComponent implements OnInit {
       }
 
       this.autService.updateProfile(updateRequest).subscribe({
+        next: () => {
+          this.user = { ...this.user, email: this.form.value.email!, username: this.form.value.username! }
+          this.sessionUserService.updateUser(this.user);
+        },
         error: (error) => {
           this.isError = true;
           if (error.status === 400) {
@@ -114,6 +112,7 @@ export class ProfileComponent implements OnInit {
         this.sessionUserService.updateUser(
           this.user
         );
+        this.fetchData();
       },
 
       error: (error) => {

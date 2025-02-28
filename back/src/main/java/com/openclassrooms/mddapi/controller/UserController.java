@@ -46,13 +46,9 @@ public class UserController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
+
         String token = jwtService.generateToken(authentication);
-        Cookie cookie = new Cookie("jwt_token", token);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 60 * 60 * 24);
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
+        jwtService.getCookieFromToken(token, response);
 
         return ResponseEntity.ok(new ApiTokenResponse(token));
     }
@@ -66,9 +62,13 @@ public class UserController {
 
     @PutMapping("user")
     @Tag(name = "User")
-    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
+    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO, HttpServletResponse response) {
         User oldUser = userService.getUserEntityByAuthentication();
         userService.updateUser(oldUser, userUpdateRequestDTO);
+
+        String token = jwtService.generateToken(userUpdateRequestDTO.getEmail());
+        jwtService.getCookieFromToken(token, response);
+
         return ResponseEntity.ok("User correctly updated !");
     }
 }
