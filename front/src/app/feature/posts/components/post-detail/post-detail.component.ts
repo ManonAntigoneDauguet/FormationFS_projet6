@@ -15,8 +15,8 @@ import { PostsService } from '../../services/posts.service';
 })
 export class PostDetailComponent implements OnInit {
 
-  isError = false;
-  errorMessage = "error système";
+  public isError = false;
+  public errorMessage = "error système";
   public user!: User | null;
   public post$!: Observable<Post>;
   public comments$!: Observable<PostComment[]>;

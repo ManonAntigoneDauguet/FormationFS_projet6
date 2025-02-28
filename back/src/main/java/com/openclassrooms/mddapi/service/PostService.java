@@ -38,6 +38,16 @@ public class PostService {
     }
 
     /**
+     * Gets all posts about topics that the user is subscriber
+     *
+     * @return Iterable<PostResponseDTO>
+     */
+    public Iterable<PostResponseDTO> getPostsBySubscription() {
+        User subscriber = userService.getUserEntityByAuthentication();
+        return postMapper.convertAllToResponseDTO(postRepository.findPostsByUserSubscriptions(subscriber.getId()));
+    }
+
+    /**
      * Gets all posts of a specified topic, ordered by chronology
      *
      * @param id as topic id

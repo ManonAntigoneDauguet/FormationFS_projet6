@@ -32,6 +32,14 @@ public class PostController {
         return ResponseEntity.ok(list);
     }
 
+    @GetMapping("post/subscriber")
+    @Tag(name = "Post")
+    @Operation(summary = "Get all posts", description = "Get a list of all posts")
+    public ResponseEntity<Iterable<PostResponseDTO>> getPostsBySubscription() {
+        Iterable<PostResponseDTO> list = postService.getPostsBySubscription();
+        return ResponseEntity.ok(list);
+    }
+
     @PostMapping("post")
     @Tag(name = "Post")
     @Operation(summary = "Add a post", description = "Add a post")

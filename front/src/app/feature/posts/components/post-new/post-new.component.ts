@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Topic } from 'src/app/core/interfaces/topic.interface';
+import { TopicsService } from 'src/app/feature/topics/services/topics.service';
+import { PostRequest } from '../../interfaces/postRequest.interface';
+import { PostsService } from '../../services/posts.service';
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,6 +14,11 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./post-new.component.scss']
 })
 export class PostNewComponent implements OnInit {
+
+  public isError = false;
+  public errorMessage = "error système";
+  public topics: Topic[] = [];
+  private subscription!: Subscription;
 
   public form = this.formBuilder.group({
     postTopic: [
@@ -34,17 +45,43 @@ export class PostNewComponent implements OnInit {
     ]
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private postService: PostsService,
+    private topicService: TopicsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   public onSubmit() {
     if (this.form.valid) {
-      alert('Formulaire valide ✅');
-      console.log('Formulaire valide ✅', this.form.value);
+      this.isError = false;
+
+      const newPost: PostRequest = {
+        title: this.form.value.postTitle!,
+        content: this.form.value.postContent!,
+        topicId: Number(this.form.value.postTopic!)
+      }
+      this.postService.savePost(newPost).subscribe();
+      this.router.navigate(['/posts']);
     } else {
-      alert('Formulaire invalide ❌');
+      this.isError = true;
+      this.errorMessage = "Formulaire invalide ❌";
     }
+  }
+
+  private fetchData() {
+    this.topicService.getAll([]).subscribe(topics => {
+      this.topics = topics;
+    })
   }
 }

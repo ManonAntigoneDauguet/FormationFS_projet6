@@ -8,12 +8,7 @@
 
             <mat-select class="input input--primary" id="postTopic" name="postTopic" formControlName="postTopic">
                 <mat-option value="">Sélectionner un thème</mat-option>
-                <mat-option value="dog">Dog</mat-option>
-                <mat-option value="cat">Cat</mat-option>
-                <mat-option value="hamster">Hamster</mat-option>
-                <mat-option value="parrot">Parrot</mat-option>
-                <mat-option value="spider">Spider</mat-option>
-                <mat-option value="goldfish">Goldfish</mat-option>
+                <mat-option *ngFor="let topic of topics" [value]="topic.id">{{topic.name}}</mat-option>
             </mat-select>
 
             <textarea class="input input--primary" id="postTitle" name="postTitle" placeholder="Titre de l'article"
@@ -21,6 +16,8 @@
 
             <textarea class="input input--primary" id="postContent" name="postContent"
                 placeholder="Contenu de l'article" formControlName="postContent"></textarea>
+
+            <span *ngIf="isError" class="formErrorMessage">{{errorMessage}}</span>
 
             <button mat-raised-button type="submit" [disabled]="form.invalid" class="button button--primary">
                 Créer
