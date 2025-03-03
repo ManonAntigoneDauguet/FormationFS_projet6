@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable, ReplaySubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
 import { PostComment } from '../interfaces/comment.interface';
 import { Post } from '../interfaces/post.interface';
 import { PostRequest } from '../interfaces/postRequest.interface';
@@ -12,7 +12,7 @@ export class PostsService {
 
   private pathService = 'api/post';
 
-  private postsSubject = new ReplaySubject<Post[]>(1)
+  private postsSubject = new BehaviorSubject<Post[]>([]);
 
   constructor(private http: HttpClient) { }
 

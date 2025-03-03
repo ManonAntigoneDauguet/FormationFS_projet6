@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/feature/profile/interfaces/user.interface';
-import { TopicSubscription } from '../../interfaces/topic-subscription.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionUserService {
 
-  public isLogged: boolean = !!localStorage.getItem('token');
+  public isLogged: boolean = false;
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
   private userSubject = new BehaviorSubject<User | null>(null);
 

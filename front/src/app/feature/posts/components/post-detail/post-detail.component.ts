@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, of, switchMap, take } from 'rxjs';
 import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
 import { User } from 'src/app/feature/profile/interfaces/user.interface';
@@ -34,6 +34,7 @@ export class PostDetailComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private sessionUserService: SessionUserService,
     private postService: PostsService
   ) { }
