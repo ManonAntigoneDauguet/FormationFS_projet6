@@ -10,6 +10,8 @@ export class AppComponent {
 
   public hideHeader = false;
 
+  public title = 'front';
+
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.hideHeader = this.router.url == "/"

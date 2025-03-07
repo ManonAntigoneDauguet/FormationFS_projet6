@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.business.mapper.CommentMapper;
 import com.openclassrooms.mddapi.common.DTO.apiRequest.CommentRequestDTO;
 import com.openclassrooms.mddapi.common.DTO.apiResponse.CommentResponseDTO;
 import com.openclassrooms.mddapi.repository.CommentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,6 +35,9 @@ public class CommentService {
      * @return Iterable<CommentResponseDTO>
      */
     public Iterable<CommentResponseDTO> getComments(Long id) {
+        Post post = postService.getPostEntityByID(id);
+        if (post == null) throw new EntityNotFoundException("Post not found");
+
         return commentMapper.convertAllToResponseDTO(commentRepository.findByPostIdOrderByCreatedAtDesc(id));
     }
 
@@ -46,6 +50,9 @@ public class CommentService {
     public void saveComment(Long id, CommentRequestDTO commentRequestDTO) {
         User author = userService.getUserEntityByAuthentication();
         Post post = postService.getPostEntityByID(id);
+
+        if (author == null) throw new EntityNotFoundException("User not found");
+        if (post == null) throw new EntityNotFoundException("Post not found");
 
         Comment comment = commentMapper.convertToEntity(commentRequestDTO);
         comment.setAuthor(author);
