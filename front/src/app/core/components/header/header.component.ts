@@ -7,19 +7,15 @@ import { SessionUserService } from '../../services/sessionUser/session-user.serv
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  public isLogged$!: Observable<boolean>;
+  public isLogged$: Observable<boolean> = this.sessionUserService.isLogged$();
 
   public displayMenu = false;
 
   constructor(
     private sessionUserService: SessionUserService
   ) { }
-
-  ngOnInit(): void {
-    this.isLogged$ = this.sessionUserService.isLogged$();
-  }
 
   openMenu() {
     this.displayMenu = !this.displayMenu;

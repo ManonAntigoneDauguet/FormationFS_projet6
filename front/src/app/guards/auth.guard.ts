@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { SessionUserService } from '../core/services/sessionUser/session-user.service';
 
 @Injectable({
@@ -22,15 +22,21 @@ export class AuthGuard implements CanActivate {
     const { path } = routeConfig as Route;
 
     if (path?.includes('auth') || path === '') {
+      if (this.sessionUserService.isLogged$()) {
+        this.sessionUserService.logout();
+      }
       return true;
     }
 
-    if (this.sessionUserService.isLogged) {
-      return true;
-    }
-
-    this.router.navigate(['']);
-    return false;
+    return this.sessionUserService.isLogged$().pipe(
+      take(1),
+      map(isLogged => {
+        if (isLogged) {
+          return true;
+        }
+        return this.router.createUrlTree(['']);
+      })
+    );
   }
 
 }
