@@ -19,3 +19,8 @@ You can now go to the web site ["Monde de Dév"](http://localhost:4200/) !
 To test the application with the mocked data, you can login you with these identifiers :
 - login: yoga@studio.com
 - password: test!1234
+
+## How to run the test
+
+npm test allows you to run all the unitary tests.  
+npm run test:watch allows you to follow change.

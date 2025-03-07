@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, of, switchMap, take, tap } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { SessionUserService } from 'src/app/core/services/sessionUser/session-user.service';
-import { User } from 'src/app/feature/profile/interfaces/user.interface';
+import { map, Observable } from 'rxjs';
 import { Post } from '../../interfaces/post.interface';
 import { PostsService } from '../../services/posts.service';
 

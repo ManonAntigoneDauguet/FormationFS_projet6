@@ -8,7 +8,6 @@ describe('UnfoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UnfoundComponent ]
     })
     .compileComponents();
 

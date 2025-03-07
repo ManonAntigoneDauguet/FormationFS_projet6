@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { TopicsContainerComponent } from './topics-container.component';
 
 describe('TopicsContainerComponent', () => {
@@ -8,9 +9,9 @@ describe('TopicsContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TopicsContainerComponent ]
+      imports: [CommonModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TopicsContainerComponent);
     component = fixture.componentInstance;
