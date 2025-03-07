@@ -67,6 +67,9 @@ public class PostService {
         User author = userService.getUserEntityByAuthentication();
         Topic topic = topicService.getTopicEntityByID(postRequestDTO.getTopicId());
 
+        if (author == null) throw new EntityNotFoundException("User not found");
+        if (topic == null) throw new EntityNotFoundException("Topic not found");
+
         Post post = postMapper.convertToEntity(postRequestDTO);
         post.setAuthor(author);
         post.setTopic(topic);
