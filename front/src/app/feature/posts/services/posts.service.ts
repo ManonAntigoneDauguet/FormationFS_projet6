@@ -20,7 +20,7 @@ export class PostsService {
    * Loads all posts about topics that the user is subscriber and update the concerned subject
    */
   public loadInitialData(): void {
-    this.http.get<Post[]>(`${this.pathService}/subscriber`, { withCredentials: true })
+    this.http.get<Post[]>(`${this.pathService}/subscriber`)
       .pipe(
         catchError(() => {
           console.error("Erreur lors du chargement des posts");
@@ -49,7 +49,7 @@ export class PostsService {
    * @returns {Observable<Post>}
    */
   public getPost(id: string): Observable<Post> {
-    return this.http.get<Post>(`${this.pathService}/${id}`, { withCredentials: true })
+    return this.http.get<Post>(`${this.pathService}/${id}`)
       .pipe(
         catchError(() => {
           console.error("Erreur lors du chargement du post");
@@ -66,8 +66,7 @@ export class PostsService {
   public savePost(newPost: PostRequest): Observable<string> {
     return this.http.post(`${this.pathService}`, newPost, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      responseType: 'text',
-      withCredentials: true
+      responseType: 'text'
     }).pipe(
       tap(() => {
         this.loadInitialData();
@@ -81,7 +80,7 @@ export class PostsService {
    * @returns {Observable<PostComment[]>}
    */
   public getAllCommentsForPost(id: string): Observable<PostComment[]> {
-    return this.http.get<PostComment[]>(`${this.pathService}/${id}/comment`, { withCredentials: true })
+    return this.http.get<PostComment[]>(`${this.pathService}/${id}/comment`)
       .pipe(
         catchError(() => {
           console.error("Erreur lors du chargement du post");
@@ -99,8 +98,7 @@ export class PostsService {
   public saveComment(id: string, newComment: { content: string }): Observable<string> {
     return this.http.post(`${this.pathService}/${id}/comment`, newComment, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      responseType: 'text',
-      withCredentials: true
+      responseType: 'text'
     });
   }
 

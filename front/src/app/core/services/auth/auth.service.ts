@@ -22,7 +22,7 @@ export class AuthService {
    */
   public login(loginRequest: LoginRequest): Observable<User> {
     return this.http.post<TokenApiResponse>(`${this.pathService}/login`, loginRequest, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }).pipe(
       switchMap(() => {
         return this.getProfile()
@@ -38,8 +38,7 @@ export class AuthService {
   public register(registerRequest: RegisterRequest): Observable<string> {
     return this.http.post(`${this.pathService}/register`, registerRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      responseType: 'text',
-      withCredentials: true
+      responseType: 'text'
     });
   }
 
@@ -48,7 +47,7 @@ export class AuthService {
    * @returns {Observable<User>}
    */
   public getProfile(): Observable<User> {
-    return this.http.get<User>(`${this.pathService}`, { withCredentials: true });
+    return this.http.get<User>(`${this.pathService}`);
   }
 
   /**
@@ -59,8 +58,7 @@ export class AuthService {
   public updateProfile(registerRequest: RegisterRequest): Observable<string> {
     return this.http.put(`${this.pathService}`, registerRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      responseType: 'text',
-      withCredentials: true
+      responseType: 'text'
     });
   }
 }

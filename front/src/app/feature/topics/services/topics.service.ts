@@ -32,7 +32,7 @@ export class TopicsService {
    * @returns 
    */
   private loadAll(listTopicsId: TopicSubscription[]): Observable<Topic[]> {
-    return this.http.get<TopicApiResponse[]>(`${this.pathService}`, { withCredentials: true })
+    return this.http.get<TopicApiResponse[]>(`${this.pathService}`)
       .pipe(
         map(topics => topics.map(
           data => ({
@@ -80,7 +80,7 @@ export class TopicsService {
    * @returns {Observable<string>} as validation message
    */
   public toSubscribe(topicId: number): Observable<string> {
-    return this.http.post(`${this.pathService}/${topicId}/subscribe`, {}, { responseType: 'text', withCredentials: true })
+    return this.http.post(`${this.pathService}/${topicId}/subscribe`, {}, { responseType: 'text' })
       .pipe(
         tap(() => {
           const updatedTopics = this.topicsSubject.getValue()
@@ -99,7 +99,7 @@ export class TopicsService {
    * @returns {Observable<string>} as validation message
    */
   public toUnsubscribe(topicId: number): Observable<string> {
-    return this.http.delete(`${this.pathService}/${topicId}/subscribe`, { responseType: 'text', withCredentials: true })
+    return this.http.delete(`${this.pathService}/${topicId}/subscribe`, { responseType: 'text' })
       .pipe(
         tap(() => {
           const updatedTopics = this.topicsSubject.getValue()
